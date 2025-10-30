@@ -80,7 +80,7 @@ const Navbar = ({ onSearch, loading, showSearch, currentCity, weather, theme, on
       }
     };
 
-    const debounceTimer = setTimeout(fetchSuggestions, 300);
+    const debounceTimer = setTimeout(fetchSuggestions, 150); // Faster response
     return () => clearTimeout(debounceTimer);
   }, [searchTerm, isInputFocused]);
 
@@ -204,12 +204,15 @@ const Navbar = ({ onSearch, loading, showSearch, currentCity, weather, theme, on
                       onChange={(e) => {
                         setSearchTerm(e.target.value);
                         setSelectedIndex(-1);
+                        setIsInputFocused(true); // Ensure focused when typing
                       }}
                       onFocus={() => {
                         setIsInputFocused(true);
-                        if (suggestions.length > 0) {
-                          setShowSuggestions(true);
-                        }
+                        setShowSuggestions(suggestions.length > 0);
+                      }}
+                      onClick={() => {
+                        setIsInputFocused(true);
+                        setShowSuggestions(suggestions.length > 0);
                       }}
                       onKeyDown={handleKeyDown}
                       placeholder="Search city..."
@@ -253,27 +256,39 @@ const Navbar = ({ onSearch, loading, showSearch, currentCity, weather, theme, on
                               return (
                                 <li
                                   key={`${suggestion.lat}-${suggestion.lon}-${index}`}
+                                  onTouchStart={(e) => {
+                                    // Immediate visual feedback on touch
+                                    e.currentTarget.style.backgroundColor = theme === 'light' ? '#3b82f6' : '#60a5fa';
+                                    e.currentTarget.style.color = '#ffffff';
+                                    e.currentTarget.style.transform = 'scale(0.98)';
+                                  }}
                                   onTouchEnd={(e) => {
                                     e.preventDefault();
                                     e.stopPropagation();
-                                    // Visual feedback
-                                    e.currentTarget.style.backgroundColor = theme === 'light' ? '#3b82f6' : '#60a5fa';
-                                    e.currentTarget.style.color = '#ffffff';
-                                    // Execute search after brief delay for visual feedback
+                                    // Execute immediately
+                                    setSearchTerm(cityName);
+                                    setShowSuggestions(false);
+                                    setSuggestions([]);
+                                    setSelectedIndex(-1);
+                                    setIsInputFocused(false);
+                                    // Small delay to show animation then execute
                                     setTimeout(() => {
-                                      setSearchTerm(cityName);
-                                      setShowSuggestions(false);
-                                      setSuggestions([]);
-                                      setSelectedIndex(-1);
                                       onSearch(cityName);
-                                    }, 150);
+                                    }, 100);
                                   }}
-                                  className={`px-3 py-2.5 cursor-pointer border-b border-base-300 last:border-b-0 transition-all duration-150 ${
+                                  onTouchCancel={(e) => {
+                                    // Reset if touch is cancelled
+                                    e.currentTarget.style.backgroundColor = '';
+                                    e.currentTarget.style.color = '';
+                                    e.currentTarget.style.transform = '';
+                                  }}
+                                  className={`px-3 py-2.5 cursor-pointer border-b border-base-300 last:border-b-0 transition-all duration-100 ${
                                     selectedIndex === index ? 'bg-primary/20' : ''
                                   }`}
                                   style={{ 
                                     touchAction: 'manipulation',
-                                    WebkitTapHighlightColor: 'transparent'
+                                    WebkitTapHighlightColor: 'transparent',
+                                    userSelect: 'none'
                                   }}
                                 >
                                 <div className="flex items-center justify-between">
