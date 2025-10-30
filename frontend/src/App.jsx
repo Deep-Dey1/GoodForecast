@@ -234,7 +234,7 @@ function App() {
           />
 
           {/* Main Content - Desktop: Fixed Grid Layout, Mobile: Scrollable Column */}
-          <div className="lg:fixed lg:inset-0 lg:pt-[120px] lg:pb-12 pt-[150px] sm:pt-[140px] md:pt-[130px] pb-4">
+          <div className="lg:fixed lg:inset-0 lg:pt-[120px] lg:pb-12 pt-[110px] sm:pt-[105px] md:pt-[100px] pb-4">
             <div className="h-full w-full px-4 sm:px-6 lg:px-8">
               
               {/* Error Message */}
