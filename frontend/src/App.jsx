@@ -211,7 +211,7 @@ function App() {
       <div className={`fixed top-0 -z-10 h-screen w-screen ${
         theme === 'light' 
           ? 'bg-[#f3f4f6] bg-[radial-gradient(rgba(156,163,175,0.3)_2px,transparent_2px)]' 
-          : 'bg-[#111827] bg-[radial-gradient(rgba(55,65,81,0.4)_2px,transparent_2px)]'
+          : 'bg-[#000000] bg-[radial-gradient(rgba(255,255,255,0.15)_2px,transparent_2px)]'
       } bg-[size:20px_20px]`}></div>
       
       {/* Landing Page Animation */}
