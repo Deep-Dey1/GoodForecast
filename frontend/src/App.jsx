@@ -216,7 +216,7 @@ function App() {
       
       {/* Landing Page Animation */}
       {showLanding && (
-        <LandingPage onAnimationComplete={() => setShowLanding(false)} />
+        <LandingPage onAnimationComplete={() => setShowLanding(false)} theme={theme} />
       )}
 
       {/* Main App */}
