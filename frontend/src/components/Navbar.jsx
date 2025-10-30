@@ -253,36 +253,51 @@ const Navbar = ({ onSearch, loading, showSearch, currentCity, weather, theme, on
                           <ul className="max-h-48 overflow-y-auto">
                             {suggestions.map((suggestion, index) => {
                               const cityName = `${suggestion.name}${suggestion.state ? ', ' + suggestion.state : ''}, ${suggestion.country}`;
+                              
+                              const handleCityClick = () => {
+                                console.log('Mobile: City clicked:', cityName);
+                                // Update search term
+                                setSearchTerm(cityName);
+                                // Close dropdown
+                                setShowSuggestions(false);
+                                setSuggestions([]);
+                                setSelectedIndex(-1);
+                                setIsInputFocused(false);
+                                // Execute search
+                                console.log('Mobile: Executing search for:', cityName);
+                                onSearch(cityName);
+                              };
+                              
                               return (
                                 <li
                                   key={`${suggestion.lat}-${suggestion.lon}-${index}`}
                                   onTouchStart={(e) => {
+                                    console.log('Mobile: Touch started on:', cityName);
                                     // Immediate visual feedback on touch
                                     e.currentTarget.style.backgroundColor = theme === 'light' ? '#3b82f6' : '#60a5fa';
                                     e.currentTarget.style.color = '#ffffff';
                                     e.currentTarget.style.transform = 'scale(0.98)';
                                   }}
                                   onTouchEnd={(e) => {
+                                    console.log('Mobile: Touch ended on:', cityName);
                                     e.preventDefault();
                                     e.stopPropagation();
-                                    // Execute immediately
-                                    setSearchTerm(cityName);
-                                    setShowSuggestions(false);
-                                    setSuggestions([]);
-                                    setSelectedIndex(-1);
-                                    setIsInputFocused(false);
-                                    // Small delay to show animation then execute
-                                    setTimeout(() => {
-                                      onSearch(cityName);
-                                    }, 100);
+                                    handleCityClick();
+                                  }}
+                                  onClick={(e) => {
+                                    console.log('Mobile: Click event on:', cityName);
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    handleCityClick();
                                   }}
                                   onTouchCancel={(e) => {
+                                    console.log('Mobile: Touch cancelled on:', cityName);
                                     // Reset if touch is cancelled
                                     e.currentTarget.style.backgroundColor = '';
                                     e.currentTarget.style.color = '';
                                     e.currentTarget.style.transform = '';
                                   }}
-                                  className={`px-3 py-2.5 cursor-pointer border-b border-base-300 last:border-b-0 transition-all duration-100 ${
+                                  className={`px-3 py-2.5 cursor-pointer border-b border-base-300 last:border-b-0 transition-all duration-100 active:bg-primary active:text-white ${
                                     selectedIndex === index ? 'bg-primary/20' : ''
                                   }`}
                                   style={{ 
