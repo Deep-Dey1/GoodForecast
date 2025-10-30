@@ -205,10 +205,11 @@ const Navbar = ({ onSearch, loading, showSearch, currentCity, weather, theme, on
                         }
                       }}
                       onBlur={() => {
+                        // Increase timeout for mobile devices to allow click to register
                         setTimeout(() => {
                           setIsInputFocused(false);
                           setShowSuggestions(false);
-                        }, 200);
+                        }, 300);
                       }}
                       onKeyDown={handleKeyDown}
                       placeholder="Search city..."
@@ -242,7 +243,14 @@ const Navbar = ({ onSearch, loading, showSearch, currentCity, weather, theme, on
                             {suggestions.map((suggestion, index) => (
                               <li
                                 key={`${suggestion.lat}-${suggestion.lon}-${index}`}
-                                onClick={() => handleSuggestionClick(suggestion)}
+                                onMouseDown={(e) => {
+                                  e.preventDefault();
+                                  handleSuggestionClick(suggestion);
+                                }}
+                                onTouchStart={(e) => {
+                                  e.preventDefault();
+                                  handleSuggestionClick(suggestion);
+                                }}
                                 className={`px-3 py-2 cursor-pointer border-b border-base-300 last:border-b-0 ${
                                   selectedIndex === index ? 'bg-base-200' : ''
                                 }`}
@@ -393,7 +401,14 @@ const Navbar = ({ onSearch, loading, showSearch, currentCity, weather, theme, on
                         {suggestions.map((suggestion, index) => (
                           <li
                             key={`${suggestion.lat}-${suggestion.lon}-${index}`}
-                            onClick={() => handleSuggestionClick(suggestion)}
+                            onMouseDown={(e) => {
+                              e.preventDefault();
+                              handleSuggestionClick(suggestion);
+                            }}
+                            onTouchStart={(e) => {
+                              e.preventDefault();
+                              handleSuggestionClick(suggestion);
+                            }}
                             className={`px-4 py-3 cursor-pointer border-b border-base-300 last:border-b-0 ${
                               selectedIndex === index ? 'bg-base-200' : ''
                             }`}
