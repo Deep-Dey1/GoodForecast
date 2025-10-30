@@ -94,7 +94,11 @@ const Navbar = ({ onSearch, loading, showSearch, currentCity, weather, theme, on
     };
 
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
   }, []);
 
   const handleSubmit = (e) => {
@@ -205,11 +209,11 @@ const Navbar = ({ onSearch, loading, showSearch, currentCity, weather, theme, on
                         }
                       }}
                       onBlur={() => {
-                        // Increase timeout for mobile devices to allow click to register
+                        // Longer timeout for mobile devices to allow touch events to complete
                         setTimeout(() => {
                           setIsInputFocused(false);
                           setShowSuggestions(false);
-                        }, 300);
+                        }, 500);
                       }}
                       onKeyDown={handleKeyDown}
                       placeholder="Search city..."
@@ -247,11 +251,12 @@ const Navbar = ({ onSearch, loading, showSearch, currentCity, weather, theme, on
                                   e.preventDefault();
                                   handleSuggestionClick(suggestion);
                                 }}
-                                onTouchStart={(e) => {
+                                onTouchEnd={(e) => {
                                   e.preventDefault();
+                                  e.stopPropagation();
                                   handleSuggestionClick(suggestion);
                                 }}
-                                className={`px-3 py-2 cursor-pointer border-b border-base-300 last:border-b-0 ${
+                                className={`px-3 py-2 cursor-pointer border-b border-base-300 last:border-b-0 active:bg-base-200 ${
                                   selectedIndex === index ? 'bg-base-200' : ''
                                 }`}
                               >
