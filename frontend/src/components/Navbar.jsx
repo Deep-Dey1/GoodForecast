@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 
-const Navbar = ({ onSearch, loading, showSearch, currentCity, weather }) => {
+const Navbar = ({ onSearch, loading, showSearch, currentCity, weather, theme, onToggleTheme }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -156,21 +156,42 @@ const Navbar = ({ onSearch, loading, showSearch, currentCity, weather }) => {
   };
 
   return (
-    <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] max-w-6xl z-50">
-      <div className="card px-4 md:px-6 py-3 md:py-4 shadow-2xl relative">
-        {/* Desktop: Single row, Mobile: Logo+Search then Time below */}
+    <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50">
+      <div className="card bg-base-100 rounded-2xl px-4 md:px-6 lg:px-8 py-4 md:py-5 border-0">
+        {/* Desktop: Single row with Theme Toggle, Logo, Search, Time */}
         <div className="flex flex-col lg:flex-row items-center justify-between gap-3 lg:gap-4">
-          {/* Logo/Brand Name */}
-          <div className="flex items-center gap-1 md:gap-2 min-w-fit flex-shrink-0">
-            <div className="text-xl md:text-3xl">🌤️</div>
-            <h1 className={`text-sm sm:text-lg md:text-2xl font-bold text-white whitespace-nowrap ${showSearch ? '' : 'opacity-0'}`}>
+          
+          {/* Left Section: Theme Toggle + Logo */}
+          <div className="flex items-center gap-3 md:gap-4 flex-shrink-0">
+            {/* Theme Toggle Button with Emoji and Glow */}
+            <button
+              onClick={onToggleTheme}
+              className="btn btn-sm md:btn-md btn-ghost swap swap-rotate hover:scale-110 transition-all"
+              aria-label="Toggle theme"
+              style={{
+                filter: theme === 'light' 
+                  ? 'drop-shadow(0 0 8px rgba(255, 200, 0, 0.6)) drop-shadow(0 0 15px rgba(255, 200, 0, 0.4))' 
+                  : 'drop-shadow(0 0 8px rgba(100, 149, 237, 0.6)) drop-shadow(0 0 15px rgba(100, 149, 237, 0.4))'
+              }}
+            >
+              {theme === 'light' ? (
+                // Sun emoji for light mode
+                <span className="text-2xl md:text-3xl">☀️</span>
+              ) : (
+                // Moon emoji for dark mode
+                <span className="text-2xl md:text-3xl">🌙</span>
+              )}
+            </button>
+            
+            {/* Logo/Brand Name */}
+            <h1 className={`text-sm sm:text-lg md:text-2xl font-bold text-base-content whitespace-nowrap ${showSearch ? '' : 'opacity-0'}`}>
               Good Forecast
             </h1>
           </div>
 
-          {/* Search Bar */}
+          {/* Search Bar - Center, flexible width on desktop */}
           {showSearch && (
-            <form onSubmit={handleSubmit} className="w-full lg:flex-1 lg:max-w-2xl" ref={dropdownRef}>
+            <form onSubmit={handleSubmit} className="w-full lg:flex-1 lg:max-w-3xl xl:max-w-4xl" ref={dropdownRef}>
             <div className="relative">
               <input
                 type="text"
@@ -253,23 +274,23 @@ const Navbar = ({ onSearch, loading, showSearch, currentCity, weather }) => {
             </form>
           )}
 
-          {/* Time Information - Below on mobile, same row on desktop */}
+          {/* Time Information - Right side on desktop, below on mobile */}
           {weather && showSearch && (
-            <div className="flex items-center gap-2 md:gap-4 min-w-fit flex-wrap justify-center lg:justify-end w-full lg:w-auto">
+            <div className="flex items-center gap-2 md:gap-3 lg:gap-4 flex-shrink-0 flex-wrap justify-center lg:justify-end w-full lg:w-auto">
             {/* Current Time */}
-            <div className="flex flex-col items-center md:items-end">
+            <div className="flex flex-col items-center lg:items-end">
               <div className="text-[10px] md:text-xs text-base-content/70">Local Time</div>
-              <div className="text-xs md:text-sm font-semibold text-white">
+              <div className="text-xs md:text-sm font-semibold text-base-content">
                 {formatTime(currentTime, weather.timezone)}
               </div>
             </div>
 
             {/* Sunrise */}
             <div className="flex items-center gap-1">
-              <div className="text-xl md:text-2xl">🌅</div>
+              <div className="text-lg md:text-xl">🌅</div>
               <div className="flex flex-col">
                 <div className="text-[10px] md:text-xs text-base-content/70">Sunrise</div>
-                <div className="text-xs md:text-sm font-semibold text-white">
+                <div className="text-xs md:text-sm font-semibold text-base-content">
                   {formatSunTime(weather.sunrise, weather.timezone)}
                 </div>
               </div>
@@ -277,10 +298,10 @@ const Navbar = ({ onSearch, loading, showSearch, currentCity, weather }) => {
 
             {/* Sunset */}
             <div className="flex items-center gap-1">
-              <div className="text-xl md:text-2xl">🌇</div>
+              <div className="text-lg md:text-xl">🌇</div>
               <div className="flex flex-col">
                 <div className="text-[10px] md:text-xs text-base-content/70">Sunset</div>
-                <div className="text-xs md:text-sm font-semibold text-white">
+                <div className="text-xs md:text-sm font-semibold text-base-content">
                   {formatSunTime(weather.sunset, weather.timezone)}
                 </div>
               </div>

@@ -44,33 +44,33 @@ const ForecastCard = ({ forecast, compact = false }) => {
   const dailySummary = window.innerWidth < 1024 ? allDays.slice(0, 4) : allDays.slice(0, 5);
 
   return (
-    <div className={compact ? "p-2 sm:p-4" : "max-w-4xl mx-auto mt-8 animate-slide-up"}>
-      <h3 className={compact ? "text-base sm:text-lg font-bold text-white mb-2 sm:mb-3" : "text-2xl font-bold text-white mb-6"}>
+    <div className={compact ? "card bg-base-100 h-full flex flex-col p-3 sm:p-4 lg:p-5 lg:pt-6 overflow-hidden border-0" : "max-w-4xl mx-auto mt-8 animate-slide-up"}>
+      <h3 className={compact ? "text-base sm:text-lg lg:text-xl font-bold text-base-content mb-2 lg:mb-3 flex-shrink-0" : "text-2xl font-bold text-base-content mb-6"}>
         🌤️ {compact ? 'Forecast' : `Forecast for ${city}, ${country}`}
       </h3>
       
-      <div className={compact ? "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 sm:gap-3" : "grid grid-cols-1 md:grid-cols-5 gap-4"}>
+      <div className={compact ? "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3 lg:gap-3 flex-1" : "grid grid-cols-1 md:grid-cols-5 gap-4"}>
         {dailySummary.map((day, index) => (
-          <div key={index} className="card bg-base-100 shadow-xl overflow-hidden rounded-2xl">
-            <figure className="h-20 sm:h-28 md:h-32 m-0 p-0 overflow-hidden">
+          <div key={index} className="card bg-base-100 shadow-xl overflow-hidden rounded-xl lg:rounded-2xl flex flex-col p-0">
+            <figure className="h-24 sm:h-28 lg:h-32 xl:h-36 m-0 p-0 overflow-hidden flex-shrink-0 rounded-t-xl lg:rounded-t-2xl">
               <img
                 src={getWeatherGif(day.weather.description)}
                 alt={day.weather.description}
                 className="w-full h-full object-cover"
               />
             </figure>
-            <div className="card-body p-2 sm:p-3">
-              <h2 className={compact ? "card-title text-xs sm:text-sm justify-center" : "card-title text-base justify-center"}>
+            <div className="card-body p-1.5 sm:p-2 lg:p-3 flex-1 flex flex-col justify-between">
+              <h2 className={compact ? "card-title text-xs sm:text-sm lg:text-base justify-center" : "card-title text-base justify-center"}>
                 {index === 0 ? 'Today' : getDayName(day.date).split(',')[0]}
               </h2>
               <div className="text-center">
-                <div className={compact ? "text-lg sm:text-xl md:text-2xl font-bold text-primary" : "text-3xl font-bold text-primary"}>
+                <div className={compact ? "text-base sm:text-lg lg:text-xl xl:text-2xl font-bold text-primary" : "text-3xl font-bold text-primary"}>
                   {day.temperature.temp}°C
                 </div>
-                <p className={compact ? "text-[10px] sm:text-xs capitalize mt-1" : "text-sm capitalize mt-2"}>
+                <p className={compact ? "text-[9px] sm:text-[10px] lg:text-xs capitalize mt-1 whitespace-nowrap overflow-hidden text-ellipsis px-1" : "text-sm capitalize mt-2"}>
                   {day.weather.description}
                 </p>
-                <div className={compact ? "flex justify-around text-[10px] sm:text-xs mt-1 sm:mt-2" : "flex justify-around text-sm mt-3"}>
+                <div className={compact ? "flex justify-around text-[10px] sm:text-xs lg:text-sm mt-1 sm:mt-2" : "flex justify-around text-sm mt-3"}>
                   <span className="text-error">↑ {day.temperature.max}°</span>
                   <span className="text-info">↓ {day.temperature.min}°</span>
                 </div>

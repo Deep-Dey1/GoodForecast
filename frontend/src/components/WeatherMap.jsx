@@ -178,7 +178,7 @@ const WeatherMap = ({ weather, onLocationClick }) => {
   if (!weather) return null;
 
   return (
-    <div className="h-[calc(100%-60px)] flex flex-col mt-[90px] mb-[50px] shadow-xl">
+    <div className="card bg-base-100 h-full flex flex-col overflow-hidden border-0 py-4">
       <div 
         ref={mapRef} 
         className="w-full h-full rounded-xl overflow-hidden"

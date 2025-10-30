@@ -18,6 +18,15 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [initialLoadComplete, setInitialLoadComplete] = useState(false);
+  const [theme, setTheme] = useState(() => {
+    // Check if user has manually set theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) return savedTheme;
+    
+    // Auto-detect based on time (7PM to 6AM = dark mode)
+    const hour = new Date().getHours();
+    return (hour >= 19 || hour < 6) ? 'dark' : 'light';
+  });
 
   // Fetch user's location or default to New York City
   const fetchInitialWeather = async () => {
@@ -101,10 +110,11 @@ function App() {
           duration: 2000,
           position: 'top-center',
           style: {
-            background: '#1f2937',
-            color: '#fff',
+            background: theme === 'light' ? '#ffffff' : '#1f2937',
+            color: theme === 'light' ? '#1f2937' : '#fff',
             padding: '16px',
             borderRadius: '10px',
+            border: theme === 'light' ? '2px solid #e5e7eb' : 'none',
           },
           icon: '🌍',
         });
@@ -118,10 +128,11 @@ function App() {
         duration: 2000,
         position: 'top-center',
         style: {
-          background: '#1f2937',
-          color: '#fff',
+          background: theme === 'light' ? '#ffffff' : '#1f2937',
+          color: theme === 'light' ? '#1f2937' : '#fff',
           padding: '16px',
           borderRadius: '10px',
+          border: theme === 'light' ? '2px solid #e5e7eb' : 'none',
         },
         icon: '🌍',
       });
@@ -174,6 +185,17 @@ function App() {
     }
   };
 
+  // Apply theme to document
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  // Toggle theme function
+  const toggleTheme = () => {
+    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
+  };
+
   // Fetch initial weather when landing page completes
   useEffect(() => {
     if (!showLanding && !initialLoadComplete) {
@@ -184,7 +206,13 @@ function App() {
   return (
     <>
       <Toaster />
-      <WaveBackground />
+      
+      {/* Radial Gradient Dot Pattern Background */}
+      <div className={`fixed top-0 -z-10 h-screen w-screen ${
+        theme === 'light' 
+          ? 'bg-[#f3f4f6] bg-[radial-gradient(rgba(156,163,175,0.3)_2px,transparent_2px)]' 
+          : 'bg-[#111827] bg-[radial-gradient(rgba(55,65,81,0.4)_2px,transparent_2px)]'
+      } bg-[size:20px_20px]`}></div>
       
       {/* Landing Page Animation */}
       {showLanding && (
@@ -201,24 +229,27 @@ function App() {
             showSearch={!showLanding}
             currentCity={weather ? `${weather.city}, ${weather.country}` : ''}
             weather={weather}
+            theme={theme}
+            onToggleTheme={toggleTheme}
           />
 
-          {/* Main Content - Desktop: Fixed, Mobile: Scrollable */}
-          <div className="lg:fixed lg:inset-0 lg:pt-24 lg:pb-2 lg:overflow-hidden pt-32 sm:pt-28 md:pt-24 pb-4">
-            <div className="h-full flex flex-col gap-4 max-w-[95%] mx-auto overflow-auto lg:overflow-hidden">
+          {/* Main Content - Desktop: Fixed Grid Layout, Mobile: Scrollable Column */}
+          <div className="lg:fixed lg:inset-0 lg:pt-[120px] lg:pb-12 pt-[150px] sm:pt-[140px] md:pt-[130px] pb-4">
+            <div className="h-full w-full px-4 sm:px-6 lg:px-8">
               
               {/* Error Message */}
               {error && (
-                <div className="flex-shrink-0">
+                <div className="mb-4">
                   <ErrorMessage message={error} onClose={() => setError(null)} />
                 </div>
               )}
 
-              {/* Main Layout: Mobile - Column (Map, Forecast, AQI), Desktop - Grid (Map Left, Weather/AQI Right) */}
-              <div className="flex-1 min-h-0 flex flex-col lg:grid lg:grid-cols-2 gap-4">
+              {/* Desktop Layout: Left (Map Full Height) | Right (Top: Forecast, Bottom: AQI) */}
+              {/* Mobile Layout: Column (Map, Forecast, AQI stacked) */}
+              <div className="h-full flex flex-col lg:grid lg:grid-cols-2 gap-3 lg:gap-4 lg:items-start">
                 
-                {/* Map - First on Mobile, Left Side on Desktop */}
-                <div className="lg:order-1 order-1 h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-full min-h-0 flex flex-col">
+                {/* LEFT SECTION - Map (Full Height on Desktop) */}
+                <div className="h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-full min-h-0 lg:self-stretch">
                   {weather ? (
                     <WeatherMap weather={weather} onLocationClick={handleMapLocationClick} />
                   ) : (
@@ -238,14 +269,15 @@ function App() {
                   )}
                 </div>
 
-                {/* Forecast & AQI - Second/Third on Mobile, Right Side on Desktop */}
-                <div className="lg:order-2 order-2 h-auto lg:h-full flex flex-col gap-4 lg:gap-2 lg:mt-[50px] mt-0">
-                  {/* Weather Forecast */}
-                  <div className="lg:flex-[2] min-h-0 lg:overflow-auto">
+                {/* RIGHT SECTION - Divided into Top (Forecast) and Bottom (AQI) */}
+                <div className="flex flex-col gap-3 lg:gap-4 h-auto lg:h-full min-h-0 lg:self-stretch">
+                  
+                  {/* TOP RIGHT - Forecast (50% height on desktop) */}
+                  <div className="lg:flex-1 min-h-[300px] lg:min-h-0">
                     {forecast ? (
                       <ForecastCard forecast={forecast} compact={true} />
                     ) : (
-                      <div className="card h-full min-h-[250px] flex items-center justify-center bg-base-100">
+                      <div className="card h-full flex items-center justify-center bg-base-100">
                         <div className="text-center p-8">
                           <span className="loading loading-spinner loading-lg"></span>
                           <h3 className="text-lg font-bold text-base-content/70 mt-4">
@@ -256,12 +288,12 @@ function App() {
                     )}
                   </div>
 
-                  {/* AQI */}
-                  <div className="lg:flex-[1] min-h-0 lg:overflow-auto lg:-mt-[520px] mt-0">
+                  {/* BOTTOM RIGHT - AQI (50% height on desktop) */}
+                  <div className="lg:flex-1 min-h-[250px] lg:min-h-0">
                     {airQuality ? (
                       <AirQualityCard airQuality={airQuality} compact={true} />
                     ) : (
-                      <div className="card h-full min-h-[250px] flex items-center justify-center bg-base-100">
+                      <div className="card h-full flex items-center justify-center bg-base-100">
                         <div className="text-center p-6">
                           <span className="loading loading-spinner loading-md"></span>
                           <h3 className="text-base font-bold text-base-content/70 mt-3">
