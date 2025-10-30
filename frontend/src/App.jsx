@@ -314,7 +314,20 @@ function App() {
               href="https://github.com/Deep-Dey1"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-white/40 hover:text-white/60 transition-colors blur-[0.5px] hover:blur-0"
+              className="text-sm font-light transition-all duration-300"
+              style={{
+                color: theme === 'light' ? 'rgba(0, 0, 0, 0.6)' : 'rgba(255, 255, 255, 0.5)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = theme === 'light' ? 'rgba(0, 0, 0, 0.9)' : 'rgba(255, 255, 255, 0.9)';
+                e.currentTarget.style.filter = theme === 'light' 
+                  ? 'drop-shadow(0 0 6px rgba(0, 0, 0, 0.3))' 
+                  : 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.5))';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = theme === 'light' ? 'rgba(0, 0, 0, 0.6)' : 'rgba(255, 255, 255, 0.5)';
+                e.currentTarget.style.filter = 'none';
+              }}
             >
               Made by Deep
             </a>
