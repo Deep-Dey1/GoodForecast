@@ -1,0 +1,13 @@
+{
+  "name": "good-forecast",
+  "version": "1.0.0",
+  "description": "Weather Application with React and Node.js",
+  "scripts": {
+    "install": "cd backend && npm install && cd ../frontend && npm install",
+    "build": "cd frontend && npm run build",
+    "start": "cd backend && npm start"
+  },
+  "keywords": ["weather", "react", "node", "express"],
+  "author": "Deep Dey",
+  "license": "ISC"
+}
