@@ -25,7 +25,18 @@ app.use((req, res, next) => {
 
 // Serve static files from the React app (production only)
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../../frontend/dist')));
+  // Set cache control headers for static assets
+  app.use(express.static(path.join(__dirname, '../../frontend/dist'), {
+    setHeaders: (res, filepath) => {
+      // Cache static assets (js, css, images) for 1 year
+      if (filepath.match(/\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$/)) {
+        res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+      } else {
+        // Don't cache HTML files
+        res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+      }
+    }
+  }));
 }
 
 // API Routes (must come after static files but before catch-all)
@@ -35,6 +46,10 @@ app.use('/api/weather', weatherRoutes);
 // Catch-all route for React app (production only)
 if (process.env.NODE_ENV === 'production') {
   app.get('*', (req, res) => {
+    // Set no-cache for HTML to ensure fresh content
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
     res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
   });
 } else {
