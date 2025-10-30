@@ -49,17 +49,17 @@ const ForecastCard = ({ forecast, compact = false }) => {
         🌤️ {compact ? 'Forecast' : `Forecast for ${city}, ${country}`}
       </h3>
       
-      <div className={compact ? "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3 lg:gap-3 flex-1" : "grid grid-cols-1 md:grid-cols-5 gap-4"}>
+      <div className={compact ? "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3 lg:gap-3 flex-1 min-h-0" : "grid grid-cols-1 md:grid-cols-5 gap-4"}>
         {dailySummary.map((day, index) => (
-          <div key={index} className="card bg-base-100 shadow-xl overflow-hidden rounded-xl lg:rounded-2xl flex flex-col p-0">
-            <figure className="h-24 sm:h-28 lg:h-32 xl:h-36 m-0 p-0 overflow-hidden flex-shrink-0 rounded-t-xl lg:rounded-t-2xl">
+          <div key={index} className="card bg-base-100 shadow-xl overflow-hidden rounded-xl lg:rounded-2xl flex flex-col p-0 min-h-0">
+            <figure className="w-full aspect-[4/3] m-0 p-0 overflow-hidden flex-shrink-0 rounded-t-xl lg:rounded-t-2xl">
               <img
                 src={getWeatherGif(day.weather.description)}
                 alt={day.weather.description}
                 className="w-full h-full object-cover"
               />
             </figure>
-            <div className="card-body p-1.5 sm:p-2 lg:p-3 flex-1 flex flex-col justify-between">
+            <div className="card-body p-1.5 sm:p-2 lg:p-3 flex-1 flex flex-col justify-between min-h-0">
               <h2 className={compact ? "card-title text-xs sm:text-sm lg:text-base justify-center" : "card-title text-base justify-center"}>
                 {index === 0 ? 'Today' : getDayName(day.date).split(',')[0]}
               </h2>

@@ -38,7 +38,7 @@ const AirQualityCard = ({ airQuality, compact = false }) => {
   };
 
   return (
-    <div className="card bg-base-100 shadow-xl overflow-hidden border-0 h-full flex flex-col lg:flex-row">
+    <div className="card bg-base-100 shadow-xl overflow-hidden border-0 h-full flex flex-col lg:flex-row min-h-0">
       {/* Left/Top Side - AQI Score with GIF */}
       <figure className="lg:w-1/3 h-32 lg:h-full relative overflow-hidden flex-shrink-0">
         <img
@@ -50,7 +50,7 @@ const AirQualityCard = ({ airQuality, compact = false }) => {
       </figure>
       
       {/* Right/Bottom Side - Pollutants Information */}
-      <div className="card-body flex-1 p-3 sm:p-4 lg:p-4 xl:p-5 lg:pb-6 overflow-auto">
+      <div className="card-body flex-1 p-3 sm:p-4 lg:p-4 xl:p-5 lg:pb-6 overflow-hidden flex flex-col min-h-0">
         <div className="flex items-center justify-between mb-2 lg:mb-3">
           <h2 className="card-title text-sm sm:text-base lg:text-lg">💨 Air Quality</h2>
           <div className={`badge ${getAQIBadgeColor(airQuality.level)} text-[10px] sm:text-xs`}>
@@ -58,7 +58,7 @@ const AirQualityCard = ({ airQuality, compact = false }) => {
           </div>
         </div>
         
-        <div className="mb-2 lg:mb-3">
+        <div className="mb-2 lg:mb-3 flex-shrink-0">
           <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary mb-1">
             {airQuality.aqi}
           </div>
@@ -66,7 +66,7 @@ const AirQualityCard = ({ airQuality, compact = false }) => {
         </div>
 
         {/* Pollutants Grid - Responsive columns */}
-        <div className="grid grid-cols-4 gap-1.5 sm:gap-2">
+        <div className="grid grid-cols-4 gap-1.5 sm:gap-2 flex-1 min-h-0 auto-rows-fr">
           {Object.entries(airQuality.components).map(([key, value]) => {
             const info = getPollutantInfo(key);
             return (
