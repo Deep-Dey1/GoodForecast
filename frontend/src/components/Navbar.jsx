@@ -231,11 +231,14 @@ const Navbar = ({ onSearch, loading, showSearch, currentCity, weather, theme, on
                       )}
                     </button>
 
-                    {/* Dropdown Suggestions */}
+                    {/* Dropdown Suggestions - Mobile */}
                     {showSuggestions && suggestions.length > 0 && (
                       <div 
-                        className="absolute top-full mt-1 w-full bg-base-100 border border-base-300 rounded-xl shadow-2xl overflow-hidden z-[100]"
+                        className="absolute top-full mt-1 w-full bg-base-100 border-2 border-primary rounded-xl shadow-2xl overflow-hidden z-[100]"
                         onTouchStart={(e) => {
+                          e.stopPropagation();
+                        }}
+                        onClick={(e) => {
                           e.stopPropagation();
                         }}
                       >
@@ -245,19 +248,34 @@ const Navbar = ({ onSearch, loading, showSearch, currentCity, weather, theme, on
                           </div>
                         ) : (
                           <ul className="max-h-48 overflow-y-auto">
-                            {suggestions.map((suggestion, index) => (
-                              <li
-                                key={`${suggestion.lat}-${suggestion.lon}-${index}`}
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  e.stopPropagation();
-                                  handleSuggestionClick(suggestion);
-                                }}
-                                className={`px-3 py-2 cursor-pointer border-b border-base-300 last:border-b-0 active:bg-base-200 hover:bg-base-200 ${
-                                  selectedIndex === index ? 'bg-base-200' : ''
-                                }`}
-                                style={{ touchAction: 'manipulation' }}
-                              >
+                            {suggestions.map((suggestion, index) => {
+                              const cityName = `${suggestion.name}${suggestion.state ? ', ' + suggestion.state : ''}, ${suggestion.country}`;
+                              return (
+                                <li
+                                  key={`${suggestion.lat}-${suggestion.lon}-${index}`}
+                                  onTouchEnd={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    // Visual feedback
+                                    e.currentTarget.style.backgroundColor = theme === 'light' ? '#3b82f6' : '#60a5fa';
+                                    e.currentTarget.style.color = '#ffffff';
+                                    // Execute search after brief delay for visual feedback
+                                    setTimeout(() => {
+                                      setSearchTerm(cityName);
+                                      setShowSuggestions(false);
+                                      setSuggestions([]);
+                                      setSelectedIndex(-1);
+                                      onSearch(cityName);
+                                    }, 150);
+                                  }}
+                                  className={`px-3 py-2.5 cursor-pointer border-b border-base-300 last:border-b-0 transition-all duration-150 ${
+                                    selectedIndex === index ? 'bg-primary/20' : ''
+                                  }`}
+                                  style={{ 
+                                    touchAction: 'manipulation',
+                                    WebkitTapHighlightColor: 'transparent'
+                                  }}
+                                >
                                 <div className="flex items-center justify-between">
                                   <div>
                                     <div className="font-semibold text-base-content text-xs">
@@ -273,7 +291,8 @@ const Navbar = ({ onSearch, loading, showSearch, currentCity, weather, theme, on
                                   </div>
                                 </div>
                               </li>
-                            ))}
+                              );
+                            })}
                           </ul>
                         )}
                       </div>
