@@ -156,7 +156,7 @@ const Navbar = ({ onSearch, loading, showSearch, currentCity, weather, theme, on
   };
 
   return (
-    <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50">
+    <nav className="absolute lg:fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50">
       <div className="card bg-base-100 rounded-2xl px-3 md:px-6 lg:px-8 py-2 md:py-5 border-0">
         
         {/* MOBILE LAYOUT: Single row for theme toggle, title, and search */}
