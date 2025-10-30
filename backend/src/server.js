@@ -23,15 +23,17 @@ app.use((req, res, next) => {
   next();
 });
 
-// API Routes
-app.use('/api/health', healthRoutes);
-app.use('/api/weather', weatherRoutes);
-
 // Serve static files from the React app (production only)
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../../frontend/dist')));
-  
-  // All other routes should serve the React app
+}
+
+// API Routes (must come after static files but before catch-all)
+app.use('/api/health', healthRoutes);
+app.use('/api/weather', weatherRoutes);
+
+// Catch-all route for React app (production only)
+if (process.env.NODE_ENV === 'production') {
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
   });
