@@ -84,20 +84,23 @@ const Navbar = ({ onSearch, loading, showSearch, currentCity, weather, theme, on
     return () => clearTimeout(debounceTimer);
   }, [searchTerm, isInputFocused]);
 
-  // Close dropdown when clicking outside
+  // Close dropdown when clicking outside (disabled for mobile to prevent premature closing)
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setShowSuggestions(false);
-        setIsInputFocused(false);
+      // Only handle actual clicks, not hover or touch proximity
+      if (event.type === 'mousedown' || event.type === 'click') {
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+          setShowSuggestions(false);
+          setIsInputFocused(false);
+        }
       }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('touchstart', handleClickOutside);
+    document.addEventListener('click', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('touchstart', handleClickOutside);
+      document.removeEventListener('click', handleClickOutside);
     };
   }, []);
 
@@ -208,13 +211,6 @@ const Navbar = ({ onSearch, loading, showSearch, currentCity, weather, theme, on
                           setShowSuggestions(true);
                         }
                       }}
-                      onBlur={() => {
-                        // Longer timeout for mobile devices to allow touch events to complete
-                        setTimeout(() => {
-                          setIsInputFocused(false);
-                          setShowSuggestions(false);
-                        }, 500);
-                      }}
                       onKeyDown={handleKeyDown}
                       placeholder="Search city..."
                       disabled={loading}
@@ -237,7 +233,12 @@ const Navbar = ({ onSearch, loading, showSearch, currentCity, weather, theme, on
 
                     {/* Dropdown Suggestions */}
                     {showSuggestions && suggestions.length > 0 && (
-                      <div className="absolute top-full mt-1 w-full bg-base-100 border border-base-300 rounded-xl shadow-2xl overflow-hidden z-50">
+                      <div 
+                        className="absolute top-full mt-1 w-full bg-base-100 border border-base-300 rounded-xl shadow-2xl overflow-hidden z-[100]"
+                        onTouchStart={(e) => {
+                          e.stopPropagation();
+                        }}
+                      >
                         {loadingSuggestions ? (
                           <div className="px-3 py-2 text-center">
                             <span className="loading loading-spinner loading-xs"></span>
@@ -247,18 +248,15 @@ const Navbar = ({ onSearch, loading, showSearch, currentCity, weather, theme, on
                             {suggestions.map((suggestion, index) => (
                               <li
                                 key={`${suggestion.lat}-${suggestion.lon}-${index}`}
-                                onMouseDown={(e) => {
-                                  e.preventDefault();
-                                  handleSuggestionClick(suggestion);
-                                }}
-                                onTouchEnd={(e) => {
+                                onClick={(e) => {
                                   e.preventDefault();
                                   e.stopPropagation();
                                   handleSuggestionClick(suggestion);
                                 }}
-                                className={`px-3 py-2 cursor-pointer border-b border-base-300 last:border-b-0 active:bg-base-200 ${
+                                className={`px-3 py-2 cursor-pointer border-b border-base-300 last:border-b-0 active:bg-base-200 hover:bg-base-200 ${
                                   selectedIndex === index ? 'bg-base-200' : ''
                                 }`}
+                                style={{ touchAction: 'manipulation' }}
                               >
                                 <div className="flex items-center justify-between">
                                   <div>
