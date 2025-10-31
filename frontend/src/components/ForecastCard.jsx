@@ -13,17 +13,17 @@ const ForecastCard = ({ forecast, compact = false }) => {
     const desc = description.toLowerCase();
     
     if (desc.includes('clear') || desc.includes('sunny')) {
-      return 'https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExdmw2eGVvcDJ0ZzZwZHNkNXR6bGo2dHJsbmxpcXN3ZW5saXFqOXg1dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/bcJvDLgxVSPulkDYB4/giphy.gif';
+      return 'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdzNhemlnM2xma2lzbms3ZjVxNnR0ZnF6dHNod3FmYnp1d3lsMzFpOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/hcXywlfUOeKSgPETlT/giphy.gif';
     } else if (desc.includes('heavy rain') || desc.includes('heavy') || desc.includes('extreme')) {
       return 'https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdnNnenl6Y2xpZjRnb3djcDBmMXY0OHowM3lvY2N0cmZoeTczdjBoMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NTfYDSrxUTxMF8uOwJ/giphy.gif';
     } else if (desc.includes('rain') || desc.includes('drizzle')) {
-      return 'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExbjU0a3VsempxMGQ5cG5nbnM3aHJyaXNrZHgzZzE4ZGc0M3VsMWt6cCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/39fj7g99qyD72/giphy.gif';
+      return 'https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWdjM253aDFta2F2NnNyMXpxZWhncmdqdWo0NWhndjRwZGs1MmxobiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xTcnT45z6H5gxFYZZS/giphy.gif';
     } else if (desc.includes('thunder') || desc.includes('storm')) {
       return 'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmYwMXRreTlreWQ1ODR4ZDhpdDllaW9zcHk3Mnh5aWNwYjV0Z2JucCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0MYOJCCE8yTfcwSY/giphy.gif';
     } else if (desc.includes('snow')) {
       return 'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmU2enVjb2FmM2J5bGM4aGduN2x0cXByemNlamhkd2lydW5nb3Z2aSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3bxlxrmbNSWgU/giphy.gif';
     } else if (desc.includes('mist') || desc.includes('fog') || desc.includes('haze')) {
-      return 'https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExaW5ibWxrOTJ3dXVzZzNjdTAwZ2s4czhwdm0zNDFybHRmbms4czFjcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/oAbvMXvah1M0U/giphy.gif';
+      return 'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExejZ4NnR6dDFpdXp0eDc4Nmg5d2RoMnBqZTlobnR0MWR0bDQ2ZWl1ciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0MYRbawhDAnyMG4w/giphy.gif';
     } else if (desc.includes('cloud')) {
       return 'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXA5aGgxMTcxNG5hYWJjY3didmhubnhqYTZ1ZHVwZTlmdThjc2RjdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l378bSNpMzDW73mSY/giphy.gif';
     } else {

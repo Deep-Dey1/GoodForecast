@@ -3,7 +3,7 @@ const AirQualityCard = ({ airQuality, compact = false }) => {
 
   const getAQIGif = (level) => {
     const gifs = {
-      'Good': 'https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2U4eXlhYmtvYjZuOTlkcWQ3NWx3N29ibjN4OWM5MzhjbGlrOTYwcCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/zNbqGADAp9bSU/giphy.gif',
+      'Good': 'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExeDFvdGs2bjVwYjVveGNvMDFjOXpzZ3F3bzBlZjVpaTFhYjZiMDMwOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/12qHWnTUBzLWXS/giphy.gif',
       'Fair': 'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExY2V4cTQzMWdkbW9mZ3k5Z3dxa2luZGJpMHIxcnVqNm44dTRncWdtNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/iF8zmKrFWTjpwVD8Hc/giphy.gif',
       'Moderate': 'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWhwejdydm05M2NkeGU2dm5pdTE0ZGpoZHRnemJ0aHcyNGNhOGplaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/EOqZlK62SlWUJKiFf9/giphy.gif',
       'Poor': 'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNXBwaXlkeXBmdTRmcHFsZDl1M2kxMTh0c25ucjVyM3E5NDJoN2l3bSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/npj0UqxfipRs0nT0OF/giphy.gif',

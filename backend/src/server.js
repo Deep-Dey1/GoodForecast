@@ -28,12 +28,14 @@ if (process.env.NODE_ENV === 'production') {
   // Set cache control headers for static assets
   app.use(express.static(path.join(__dirname, '../../frontend/dist'), {
     setHeaders: (res, filepath) => {
-      // Cache static assets (js, css, images) for 1 year
+      // Cache static assets (js, css, images) for 1 year - they have unique hashes
       if (filepath.match(/\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$/)) {
         res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
       } else {
-        // Don't cache HTML files
-        res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+        // Don't cache HTML files - force revalidation
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '0');
       }
     }
   }));
