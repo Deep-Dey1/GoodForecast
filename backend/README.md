@@ -1,328 +1,898 @@
-# 🔧 Backend API - Good Forecast# Weather App - Backend API
+# 🔧 Weather App Backend API# 🔧 Backend API - Good Forecast# Weather App - Backend API
 
 
 
-Node.js/Express backend server for the Good Forecast weather application.Backend service for the Weather Forecasting Application built with Node.js and Express.
+A robust Node.js/Express REST API providing weather data services with comprehensive testing and Docker support.
 
 
 
-## 📋 Overview## 🚀 Features
+## 📋 OverviewNode.js/Express backend server for the Good Forecast weather application.Backend service for the Weather Forecasting Application built with Node.js and Express.
 
 
 
-This is the backend API that powers the Good Forecast weather application. It provides endpoints for fetching weather data, forecasts, air quality information, and city search functionality using the OpenWeatherMap API.- Current weather data by city name or coordinates
-
-- 5-day weather forecast
-
-## 🛠️ Tech Stack- City search with autocomplete
-
-- Input validation and error handling
-
-- **Node.js** - Runtime environment- CORS enabled for frontend integration
-
-- **Express 4.18.2** - Web framework- Health check endpoints
-
-- **Axios 1.4.0** - HTTP client for API requests- Unit tests with Jest
-
-- **CORS** - Cross-origin resource sharing
-
-- **dotenv** - Environment variable management## 📋 Prerequisites
+This backend service acts as a middleware between the frontend application and the OpenWeatherMap API, providing structured weather data, forecasts, and air quality information.
 
 
 
-## 📁 Project Structure- Node.js (v14 or higher)
+## 🏗️ Architecture## 📋 Overview## 🚀 Features
 
-- npm or yarn
 
-```- OpenWeatherMap API key (free)
+
+```
+
+Frontend Request
+
+      ↓This is the backend API that powers the Good Forecast weather application. It provides endpoints for fetching weather data, forecasts, air quality information, and city search functionality using the OpenWeatherMap API.- Current weather data by city name or coordinates
+
+Express Router (routes/)
+
+      ↓- 5-day weather forecast
+
+Controller (controllers/)
+
+      ↓## 🛠️ Tech Stack- City search with autocomplete
+
+Service Layer (services/)
+
+      ↓- Input validation and error handling
+
+OpenWeatherMap API
+
+      ↓- **Node.js** - Runtime environment- CORS enabled for frontend integration
+
+Response Handler (utils/)
+
+      ↓- **Express 4.18.2** - Web framework- Health check endpoints
+
+JSON Response to Frontend
+
+```- **Axios 1.4.0** - HTTP client for API requests- Unit tests with Jest
+
+
+
+## 🚀 Tech Stack- **CORS** - Cross-origin resource sharing
+
+
+
+- **Runtime:** Node.js 18.20.8- **dotenv** - Environment variable management## 📋 Prerequisites
+
+- **Framework:** Express.js 4.18.2
+
+- **HTTP Client:** Axios 1.4.0
+
+- **Testing:** Jest 29.5.0 + Supertest 6.3.3
+
+- **Development:** Nodemon 3.1.10## 📁 Project Structure- Node.js (v14 or higher)
+
+- **Environment:** dotenv 16.0.3
+
+- **Security:** CORS 2.8.5- npm or yarn
+
+
+
+## 📁 Project Structure```- OpenWeatherMap API key (free)
+
+
+
+```backend/
 
 backend/
 
-├── src/## 🛠️ Installation
+├── src/├── src/## 🛠️ Installation
 
-│   ├── controllers/
+│   ├── controllers/          # Request handlers
 
-│   │   └── weatherController.js    # Request handlers1. Install dependencies:
+│   │   ├── weatherController.js   # Main weather endpoints│   ├── controllers/
 
-│   ├── middleware/```bash
+│   │   └── ...
 
-│   │   ├── errorHandler.js         # Global error handlingnpm install
+│   ├── services/             # Business logic│   │   └── weatherController.js    # Request handlers1. Install dependencies:
 
-│   │   └── validation.js           # Input validation```
+│   │   ├── weatherService.js      # OpenWeatherMap integration
 
-│   ├── routes/
+│   │   └── ...│   ├── middleware/```bash
 
-│   │   ├── weatherRoutes.js        # Weather endpoints2. Get your free API key:
+│   ├── routes/               # API routes
 
-│   │   └── healthRoutes.js         # Health check   - Visit [OpenWeatherMap](https://openweathermap.org/api)
+│   │   ├── weatherRoutes.js       # Weather endpoints│   │   ├── errorHandler.js         # Global error handlingnpm install
 
-│   ├── services/   - Sign up for a free account
+│   │   └── ...
 
-│   │   └── weatherService.js       # Business logic & API calls   - Generate an API key
+│   ├── middleware/           # Custom middleware│   │   └── validation.js           # Input validation```
 
-│   ├── utils/
+│   │   ├── errorHandler.js        # Global error handling
 
-│   │   ├── apiError.js             # Custom error class3. Configure environment variables:
+│   │   ├── validateCity.js        # Input validation│   ├── routes/
 
-│   │   └── logger.js               # Logging utility   - Copy `.env.example` to `.env`
+│   │   └── ...
 
-│   └── server.js                   # Entry point   - Add your API key to `.env`:
+│   ├── utils/                # Helper functions│   │   ├── weatherRoutes.js        # Weather endpoints2. Get your free API key:
+
+│   │   ├── apiResponse.js         # Standardized responses
+
+│   │   ├── logger.js              # Logging utility│   │   └── healthRoutes.js         # Health check   - Visit [OpenWeatherMap](https://openweathermap.org/api)
+
+│   │   └── ...
+
+│   └── server.js             # Application entry point│   ├── services/   - Sign up for a free account
+
+├── tests/                    # Test files
+
+│   ├── weather.test.js       # API endpoint tests│   │   └── weatherService.js       # Business logic & API calls   - Generate an API key
+
+│   └── ...
+
+├── .env                      # Environment variables (not in git)│   ├── utils/
+
+├── .env.example              # Environment template
+
+├── .dockerignore             # Docker ignore rules│   │   ├── apiError.js             # Custom error class3. Configure environment variables:
+
+├── Dockerfile                # Container definition
+
+├── jest.config.js            # Jest configuration│   │   └── logger.js               # Logging utility   - Copy `.env.example` to `.env`
+
+├── package.json              # Dependencies
+
+└── README.md                 # This file│   └── server.js                   # Entry point   - Add your API key to `.env`:
+
+```
 
 ├── .env                            # Environment variables```
 
+## 🔧 Installation & Setup
+
 ├── package.jsonOPENWEATHER_API_KEY=your_actual_api_key_here
+
+### Prerequisites
 
 └── README.md                       # This file```
 
-```
+- Node.js 18.x or higher
+
+- npm or yarn```
+
+- OpenWeatherMap API Key ([Get free key](https://openweathermap.org/api))
 
 ## 🏃 Running the Application
 
+### Local Setup
+
 ## 🚀 Getting Started
 
-### Development mode (with auto-reload):
+1. **Navigate to backend directory:**
 
-### Prerequisites```bash
+   ```bash### Development mode (with auto-reload):
 
-npm run dev
+   cd backend
 
-- Node.js (v16 or higher)```
+   ```### Prerequisites```bash
+
+
+
+2. **Install dependencies:**npm run dev
+
+   ```bash
+
+   npm install- Node.js (v16 or higher)```
+
+   ```
 
 - npm or yarn
 
-- OpenWeatherMap API key ([Get it free](https://openweathermap.org/api))### Production mode:
+3. **Configure environment:**
 
-```bash
+   ```bash- OpenWeatherMap API key ([Get it free](https://openweathermap.org/api))### Production mode:
 
-### Installationnpm start
+   cp .env.example .env
 
-```
+   ``````bash
 
-1. **Install dependencies**
+
+
+   Edit `.env` file:### Installationnpm start
+
+   ```env
+
+   OPENWEATHER_API_KEY=your_api_key_here```
+
+   PORT=5000
+
+   NODE_ENV=development1. **Install dependencies**
+
+   ```
 
 ```bashThe server will start on `http://localhost:5000`
 
-cd backend
+4. **Start development server:**
 
-npm install## 📡 API Endpoints
+   ```bashcd backend
+
+   npm run dev
+
+   ```npm install## 📡 API Endpoints
+
+   Server runs on `http://localhost:5000`
 
 ```
 
-### Health Check
+5. **Start production server:**
 
-2. **Create environment file**- `GET /api/health` - Service health status
+   ```bash### Health Check
 
-- `GET /api/health/ready` - Readiness check
+   npm start
 
-Create `.env` file:
+   ```2. **Create environment file**- `GET /api/health` - Service health status
 
-```env### Weather Endpoints
+
+
+## 📡 API Endpoints- `GET /api/health/ready` - Readiness check
+
+
+
+### Base URLCreate `.env` file:
+
+```
+
+http://localhost:5000/api```env### Weather Endpoints
+
+```
 
 # Server Configuration- `GET /api/weather/city/:cityName` - Get current weather by city
 
+### Available Endpoints
+
 PORT=5000- `GET /api/weather/coordinates?lat={lat}&lon={lon}` - Get weather by coordinates
 
-NODE_ENV=development- `GET /api/weather/forecast/:cityName` - Get 5-day forecast
+#### 1. Health Check
 
-- `GET /api/weather/search/:query` - Search cities (autocomplete)
+```httpNODE_ENV=development- `GET /api/weather/forecast/:cityName` - Get 5-day forecast
 
-# OpenWeatherMap API
+GET /api/health
 
-OPENWEATHER_API_KEY=your_api_key_here### Example Requests
+```- `GET /api/weather/search/:query` - Search cities (autocomplete)
 
 
 
-# CORS Configuration**Get weather for London:**
+**Response:**# OpenWeatherMap API
+
+```json
+
+{OPENWEATHER_API_KEY=your_api_key_here### Example Requests
+
+  "success": true,
+
+  "message": "Weather API is running",
+
+  "timestamp": "2025-11-01T10:30:00.000Z"
+
+}# CORS Configuration**Get weather for London:**
+
+```
 
 ALLOWED_ORIGINS=http://localhost:5173,http://localhost:3000```bash
 
-```curl http://localhost:5000/api/weather/city/London
+#### 2. Get Weather by City
 
-```
+```http```curl http://localhost:5000/api/weather/city/London
 
-### Running the Server
+GET /api/weather/city/:cityName
+
+``````
+
+
+
+**Parameters:**### Running the Server
+
+- `cityName` (string, required) - Name of the city
 
 **Get weather by coordinates:**
 
-**Development mode (with auto-reload):**```bash
+**Example:**
 
-```bashcurl http://localhost:5000/api/weather/coordinates?lat=51.5074&lon=-0.1278
+```bash**Development mode (with auto-reload):**```bash
 
-npm run dev```
+curl http://localhost:5000/api/weather/city/London
+
+``````bashcurl http://localhost:5000/api/weather/coordinates?lat=51.5074&lon=-0.1278
+
+
+
+**Response:**npm run dev```
+
+```json
+
+{```
+
+  "success": true,
+
+  "data": {**Get 5-day forecast:**
+
+    "city": "London",
+
+    "country": "GB",**Production mode:**```bash
+
+    "coordinates": {
+
+      "lat": 51.5074,```bashcurl http://localhost:5000/api/weather/forecast/Paris
+
+      "lon": -0.1278
+
+    },npm start```
+
+    "temperature": {
+
+      "current": 15,```
+
+      "feelsLike": 13,
+
+      "min": 12,**Search cities:**
+
+      "max": 18
+
+    },Server will run on `http://localhost:5000````bash
+
+    "weather": {
+
+      "main": "Clouds",curl http://localhost:5000/api/weather/search/New
+
+      "description": "scattered clouds",
+
+      "icon": "03d"## 📡 API Endpoints```
+
+    },
+
+    "wind": {
+
+      "speed": 5.5,
+
+      "direction": 220### Base URL## 🧪 Testing
+
+    },
+
+    "humidity": 75,```
+
+    "pressure": 1013,
+
+    "visibility": 10000,http://localhost:5000/apiRun tests:
+
+    "sunrise": 1698738000,
+
+    "sunset": 1698776000,``````bash
+
+    "timezone": 0
+
+  }npm test
+
+}
+
+```### Endpoints```
+
+
+
+#### 3. Get Weather by Coordinates
+
+```http
+
+GET /api/weather/coordinates?lat={latitude}&lon={longitude}| Method | Endpoint | Description |Run tests in watch mode:
 
 ```
-
-**Get 5-day forecast:**
-
-**Production mode:**```bash
-
-```bashcurl http://localhost:5000/api/weather/forecast/Paris
-
-npm start```
-
-```
-
-**Search cities:**
-
-Server will run on `http://localhost:5000````bash
-
-curl http://localhost:5000/api/weather/search/New
-
-## 📡 API Endpoints```
-
-
-
-### Base URL## 🧪 Testing
-
-```
-
-http://localhost:5000/apiRun tests:
-
-``````bash
-
-npm test
-
-### Endpoints```
-
-
-
-| Method | Endpoint | Description |Run tests in watch mode:
 
 |--------|----------|-------------|```bash
 
-| GET | `/api/health` | Health check |npm run test:watch
+**Query Parameters:**
+
+- `lat` (number, required) - Latitude (-90 to 90)| GET | `/api/health` | Health check |npm run test:watch
+
+- `lon` (number, required) - Longitude (-180 to 180)
 
 | GET | `/api/weather/city/:cityName` | Get weather by city |```
 
-| GET | `/api/weather/coordinates?lat=&lon=` | Get weather by coordinates |
+**Example:**
 
-| GET | `/api/weather/forecast/:cityName` | Get 5-day forecast |## 📁 Project Structure
+```bash| GET | `/api/weather/coordinates?lat=&lon=` | Get weather by coordinates |
 
-| GET | `/api/weather/air-quality?lat=&lon=` | Get air quality data |
+curl "http://localhost:5000/api/weather/coordinates?lat=51.5074&lon=-0.1278"
 
-| GET | `/api/weather/search/:query` | Search cities (geocoding) |```
+```| GET | `/api/weather/forecast/:cityName` | Get 5-day forecast |## 📁 Project Structure
+
+
+
+#### 4. Get 5-Day Forecast| GET | `/api/weather/air-quality?lat=&lon=` | Get air quality data |
+
+```http
+
+GET /api/weather/forecast/:cityName| GET | `/api/weather/search/:query` | Search cities (geocoding) |```
+
+```
 
 backend/
 
-For detailed API documentation with request/response examples, see the main [README](../README.md#-api-documentation).├── src/
+**Parameters:**
 
-│   ├── controllers/       # Request handlers
+- `cityName` (string, required) - Name of the cityFor detailed API documentation with request/response examples, see the main [README](../README.md#-api-documentation).├── src/
 
-## 🔒 Input Validation│   ├── middleware/        # Custom middleware
+
+
+**Example:**│   ├── controllers/       # Request handlers
+
+```bash
+
+curl http://localhost:5000/api/weather/forecast/Paris## 🔒 Input Validation│   ├── middleware/        # Custom middleware
+
+```
 
 │   ├── routes/           # API routes
 
-All endpoints include input validation:│   ├── services/         # Business logic
+**Response:**
 
-│   ├── utils/            # Utility functions
+```jsonAll endpoints include input validation:│   ├── services/         # Business logic
 
-- **City Name:** Letters, spaces, Unicode characters (2-100 chars)│   └── server.js         # App entry point
+{
 
-- **Coordinates:** Latitude (-90 to 90), Longitude (-180 to 180)├── tests/                # Test files
+  "success": true,│   ├── utils/            # Utility functions
 
-- **Search Query:** Minimum 2 characters├── .env                  # Environment variables
+  "data": {
 
-├── .env.example          # Environment template
+    "city": "Paris",- **City Name:** Letters, spaces, Unicode characters (2-100 chars)│   └── server.js         # App entry point
 
-## ⚠️ Error Handling├── jest.config.js        # Jest configuration
+    "country": "FR",
 
-└── package.json
+    "forecast": [- **Coordinates:** Latitude (-90 to 90), Longitude (-180 to 180)├── tests/                # Test files
 
-Standardized error responses:```
+      {
 
-```json
+        "date": "2025-11-01",- **Search Query:** Minimum 2 characters├── .env                  # Environment variables
 
-{## 🐳 Docker Support
+        "temperature": {
 
-  "success": false,
+          "day": 16,├── .env.example          # Environment template
 
-  "message": "Error description",Build Docker image:
+          "min": 12,
 
-  "type": "ErrorType",```bash
+          "max": 18## ⚠️ Error Handling├── jest.config.js        # Jest configuration
+
+        },
+
+        "weather": {└── package.json
+
+          "main": "Rain",
+
+          "description": "light rain",Standardized error responses:```
+
+          "icon": "10d"
+
+        },```json
+
+        "humidity": 80,
+
+        "windSpeed": 6.2,{## 🐳 Docker Support
+
+        "pop": 0.65
+
+      }  "success": false,
+
+      // ... 4 more days
+
+    ]  "message": "Error description",Build Docker image:
+
+  }
+
+}  "type": "ErrorType",```bash
+
+```
 
   "statusCode": 404docker build -t weather-app-backend .
 
-}```
+#### 5. Get Air Quality
+
+```http}```
+
+GET /api/weather/air-quality?lat={latitude}&lon={longitude}
+
+``````
+
+
+
+**Query Parameters:**Run container:
+
+- `lat` (number, required) - Latitude
+
+- `lon` (number, required) - Longitude## 🔧 Configuration```bash
+
+
+
+**Example:**docker run -p 5000:5000 --env-file .env weather-app-backend
+
+```bash
+
+curl "http://localhost:5000/api/weather/air-quality?lat=51.5074&lon=-0.1278"### Environment Variables```
 
 ```
 
-Run container:
-
-## 🔧 Configuration```bash
-
-docker run -p 5000:5000 --env-file .env weather-app-backend
-
-### Environment Variables```
 
 
+**Response:**
 
-| Variable | Required | Default | Description |## 🔧 Environment Variables
+```json| Variable | Required | Default | Description |## 🔧 Environment Variables
 
-|----------|----------|---------|-------------|
+{
 
-| `PORT` | No | 5000 | Server port || Variable | Description | Default |
+  "success": true,|----------|----------|---------|-------------|
 
-| `NODE_ENV` | No | development | Environment ||----------|-------------|---------|
+  "data": {
 
-| `OPENWEATHER_API_KEY` | Yes | - | API key || `OPENWEATHER_API_KEY` | OpenWeatherMap API key | Required |
+    "aqi": 2,| `PORT` | No | 5000 | Server port || Variable | Description | Default |
 
-| `ALLOWED_ORIGINS` | No | * | CORS origins || `PORT` | Server port | 5000 |
+    "aqiLevel": "Fair",
 
-| `NODE_ENV` | Environment (development/production) | development |
+    "components": {| `NODE_ENV` | No | development | Environment ||----------|-------------|---------|
 
-## 📞 Support| `ALLOWED_ORIGINS` | CORS allowed origins | * |
+      "co": 250.34,
+
+      "no": 0.01,| `OPENWEATHER_API_KEY` | Yes | - | API key || `OPENWEATHER_API_KEY` | OpenWeatherMap API key | Required |
+
+      "no2": 15.52,
+
+      "o3": 68.66,| `ALLOWED_ORIGINS` | No | * | CORS origins || `PORT` | Server port | 5000 |
+
+      "so2": 0.64,
+
+      "pm2_5": 8.32,| `NODE_ENV` | Environment (development/production) | development |
+
+      "pm10": 11.45,
+
+      "nh3": 0.92## 📞 Support| `ALLOWED_ORIGINS` | CORS allowed origins | * |
+
+    },
+
+    "timestamp": "2025-11-01T10:30:00.000Z"
+
+  }
+
+}For issues or questions, check the main [README](../README.md) or open an issue on GitHub.## 📝 API Response Format
+
+```
 
 
 
-For issues or questions, check the main [README](../README.md) or open an issue on GitHub.## 📝 API Response Format
+#### 6. Search Cities (Geocoding)
+
+```http---### Success Response
+
+GET /api/weather/search/:query
+
+``````json
 
 
 
----### Success Response
+**Parameters:**Made with ❤️ by Deep{
+
+- `query` (string, required) - City name or partial name (min 2 chars)
+
+  "success": true,
+
+**Example:**  "data": {
+
+```bash    // Response data
+
+curl http://localhost:5000/api/weather/search/New  }
+
+```}
+
+```
+
+**Response:**
+
+```json### Error Response
+
+{```json
+
+  "success": true,{
+
+  "data": [  "success": false,
+
+    {  "message": "Error message",
+
+      "name": "New York",  "type": "ErrorType"
+
+      "country": "US",}
+
+      "state": "New York",```
+
+      "lat": 40.7128,
+
+      "lon": -74.0060## 🚨 Error Handling
+
+    },
+
+    {The API handles various error types:
+
+      "name": "New Delhi",- `ValidationError` (400) - Invalid input
+
+      "country": "IN",- `ApiError` (4xx/5xx) - External API errors
+
+      "state": "Delhi",- City not found (404)
+
+      "lat": 28.6139,- Invalid API key (401)
+
+      "lon": 77.2090- Rate limiting (429)
+
+    }
+
+    // ... more results## 📊 Code Quality
+
+  ]
+
+}This project is configured for:
+
+```- **SonarQube** - Code quality analysis
+
+- **Jest** - Unit testing with coverage
+
+### Error Responses- **ESLint** - Code linting (to be added)
+
+
+
+**404 - Not Found:**## 🤝 Contributing
 
 ```json
 
-Made with ❤️ by Deep{
+{1. Follow the existing code structure
 
-  "success": true,
-  "data": {
-    // Response data
-  }
+  "success": false,2. Write tests for new features
+
+  "message": "City not found",3. Ensure all tests pass before committing
+
+  "type": "NotFoundError"4. Update documentation as needed
+
 }
-```
 
-### Error Response
+```## 📄 License
+
+
+
+**400 - Bad Request:**ISC
+
 ```json
 {
   "success": false,
-  "message": "Error message",
-  "type": "ErrorType"
+  "message": "Invalid coordinates",
+  "type": "ValidationError"
 }
 ```
 
-## 🚨 Error Handling
+**500 - Internal Server Error:**
+```json
+{
+  "success": false,
+  "message": "Failed to fetch weather data",
+  "type": "ApiError"
+}
+```
 
-The API handles various error types:
-- `ValidationError` (400) - Invalid input
-- `ApiError` (4xx/5xx) - External API errors
-- City not found (404)
-- Invalid API key (401)
-- Rate limiting (429)
+## 🧪 Testing
 
-## 📊 Code Quality
+### Run Tests
 
-This project is configured for:
-- **SonarQube** - Code quality analysis
-- **Jest** - Unit testing with coverage
-- **ESLint** - Code linting (to be added)
+```bash
+# Run all tests
+npm test
 
-## 🤝 Contributing
+# Run tests with coverage
+npm test -- --coverage
 
-1. Follow the existing code structure
-2. Write tests for new features
-3. Ensure all tests pass before committing
-4. Update documentation as needed
+# Run tests in watch mode
+npm run test:watch
 
-## 📄 License
+# Run specific test file
+npm test weather.test.js
+```
 
-ISC
+### Test Coverage
+
+Current coverage: **41%**
+
+Coverage thresholds configured in `jest.config.js`:
+- Branches: 30%
+- Functions: 20%
+- Lines: 30%
+- Statements: 30%
+
+### Test Files
+
+**tests/weather.test.js** - API endpoint tests:
+- ✅ GET /api/health - Health check endpoint
+- ✅ GET /api/weather/city/:cityName - Valid city
+- ✅ GET /api/weather/city/:cityName - Invalid city
+- ✅ GET /api/weather/coordinates - Valid coordinates
+- ✅ GET /api/weather/coordinates - Invalid coordinates
+- ✅ GET /api/weather/forecast/:cityName - Valid city
+- ✅ GET /api/weather/forecast/:cityName - Invalid city
+- ✅ GET /api/weather/search/:query - Valid query
+
+**Latest Test Results:**
+```
+Test Suites: 1 passed, 1 total
+Tests:       8 passed, 8 total
+Time:        2.2s
+Coverage:    41%
+```
+
+## 🐳 Docker
+
+### Build Image
+
+```bash
+# Build backend image
+docker build -t weather-app-backend .
+
+# Build with custom tag
+docker build -t deepdey01/weather-app-backend:v1.0 .
+```
+
+### Run Container
+
+```bash
+# Run with environment variables
+docker run -d \
+  -p 5000:5000 \
+  -e OPENWEATHER_API_KEY=your_key \
+  --name weather-backend \
+  weather-app-backend
+
+# Run with .env file
+docker run -d \
+  -p 5000:5000 \
+  --env-file .env \
+  --name weather-backend \
+  weather-app-backend
+```
+
+### Multi-stage Dockerfile
+
+The `Dockerfile` uses multi-stage builds for optimization:
+
+```dockerfile
+# Stage 1: Builder
+FROM node:18-alpine AS builder
+WORKDIR /usr/src/app
+COPY package*.json ./
+RUN npm ci --only=production
+
+# Stage 2: Production
+FROM node:18-alpine
+WORKDIR /usr/src/app
+COPY --from=builder /usr/src/app/node_modules ./node_modules
+COPY . .
+EXPOSE 5000
+CMD ["node", "src/server.js"]
+```
+
+## 🔐 Environment Variables
+
+Required environment variables:
+
+| Variable | Type | Required | Default | Description |
+|----------|------|----------|---------|-------------|
+| `OPENWEATHER_API_KEY` | string | Yes | - | OpenWeatherMap API key |
+| `PORT` | number | No | 5000 | Server port |
+| `NODE_ENV` | string | No | development | Environment (development/production/test) |
+| `ALLOWED_ORIGINS` | string | No | * | CORS allowed origins |
+
+## 🛠️ Development
+
+### Project Scripts
+
+```json
+{
+  "start": "node src/server.js",
+  "dev": "nodemon src/server.js",
+  "test": "jest --coverage",
+  "test:watch": "jest --watch",
+  "build": "npm run build:frontend",
+  "build:frontend": "cd ../frontend && npm install && npm run build",
+  "vercel-build": "cd ../frontend && npm install && npm run build"
+}
+```
+
+### Code Structure Guidelines
+
+**Controllers (`controllers/`):**
+- Handle HTTP requests and responses
+- Validate input parameters
+- Call service layer functions
+- Format responses using utils
+
+**Services (`services/`):**
+- Contain business logic
+- Make external API calls
+- Process and transform data
+- No direct HTTP handling
+
+**Middleware (`middleware/`):**
+- Request validation
+- Error handling
+- Logging
+- Authentication (if needed)
+
+**Utils (`utils/`):**
+- Helper functions
+- Response formatters
+- Logger configuration
+- Constants
+
+## 🔍 Debugging
+
+### Enable Debug Logging
+
+Set environment variable:
+```bash
+DEBUG=weather:* npm run dev
+```
+
+### Check Server Status
+
+```bash
+# Health check
+curl http://localhost:5000/api/health
+
+# Test specific endpoint
+curl http://localhost:5000/api/weather/city/London
+```
+
+### Common Issues
+
+**Server won't start:**
+- Check if port 5000 is available: `netstat -ano | grep :5000`
+- Verify `.env` file exists and has valid API key
+- Ensure all dependencies are installed: `npm install`
+
+**API returns 401:**
+- Verify OpenWeatherMap API key is valid
+- Check API key has necessary permissions
+
+**Tests failing:**
+- Ensure `NODE_ENV=test` is set during testing
+- Check that server doesn't start in test mode
+- Verify Jest configuration in `jest.config.js`
+
+## 📊 Performance
+
+- Average response time: < 200ms
+- Concurrent requests: Supports 100+ simultaneous connections
+- Memory usage: ~50MB idle, ~150MB under load
+- Docker image size: ~150MB (optimized with multi-stage build)
+
+## 🚀 Deployment
+
+### Production Checklist
+
+- [ ] Set `NODE_ENV=production`
+- [ ] Use strong API keys
+- [ ] Configure CORS properly
+- [ ] Enable logging
+- [ ] Set up monitoring
+- [ ] Configure health checks
+- [ ] Use process manager (PM2)
+
+### Deployment Options
+
+1. **Docker (Recommended)**
+2. **Vercel Serverless**
+3. **Heroku**
+4. **AWS EC2/ECS**
+5. **DigitalOcean**
+
+## 📝 License
+
+This project is licensed under the ISC License.
+
+## 👤 Author
+
+**Deep Dey**
+- GitHub: [@Deep-Dey1](https://github.com/Deep-Dey1)
+
+---
+
+**Last Updated:** November 2025

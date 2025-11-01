@@ -1,414 +1,826 @@
-# 🌤️ Good Forecast - Weather Application# 🌤️ Weather Forecasting Application
+# 🌤️ GoodForecast - Weather Application# 🌤️ Good Forecast - Weather Application# 🌤️ Weather Forecasting Application
 
 
 
-A beautiful, responsive full-stack weather application that provides real-time weather data, 5-day forecasts, air quality information, and an interactive map interface.A full-stack weather forecasting application built with **Node.js**, **Express**, **React**, and **Tailwind CSS**, featuring complete **DevOps CI/CD pipeline** with Docker, Jenkins, and SonarQube.
+A full-stack weather application with comprehensive DevOps implementation featuring automated CI/CD pipeline, containerization, and quality assurance tools.
 
 
 
-![Weather App](https://img.shields.io/badge/Status-Production-success)![License](https://img.shields.io/badge/license-ISC-blue)
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)]()A beautiful, responsive full-stack weather application that provides real-time weather data, 5-day forecasts, air quality information, and an interactive map interface.A full-stack weather forecasting application built with **Node.js**, **Express**, **React**, and **Tailwind CSS**, featuring complete **DevOps CI/CD pipeline** with Docker, Jenkins, and SonarQube.
 
-![React](https://img.shields.io/badge/React-19.1.1-blue)![Node](https://img.shields.io/badge/node-%3E%3D14.0.0-brightgreen)
+[![Docker](https://img.shields.io/badge/docker-enabled-blue)]()
 
-![Node.js](https://img.shields.io/badge/Node.js-Express-green)![Docker](https://img.shields.io/badge/docker-ready-blue)
+[![License](https://img.shields.io/badge/license-ISC-green)]()
 
-![License](https://img.shields.io/badge/License-MIT-yellow)
 
----
 
-## ✨ Features
+## 🌟 Project Overview![Weather App](https://img.shields.io/badge/Status-Production-success)![License](https://img.shields.io/badge/license-ISC-blue)
 
-## 📋 Table of Contents
 
-- 🌍 **Real-time Weather Data** - Get current weather for any city worldwide
 
-- 📅 **5-Day Forecast** - View detailed weather predictions with custom GIFs- [Features](#-features)
+GoodForecast is a modern weather application that provides real-time weather information with an interactive 3D globe visualization. The project demonstrates enterprise-grade DevOps practices including automated testing, continuous integration, containerization, and deployment automation.![React](https://img.shields.io/badge/React-19.1.1-blue)![Node](https://img.shields.io/badge/node-%3E%3D14.0.0-brightgreen)
 
-- 💨 **Air Quality Index** - Monitor air pollution levels with visual indicators- [Tech Stack](#-tech-stack)
 
-- 🗺️ **Interactive Map** - Click anywhere on the map to get weather data- [Project Structure](#-project-structure)
 
-- 🔍 **Smart Search** - Autocomplete search with geocoding API- [Quick Start](#-quick-start)
+**Live Demo:** [https://goodforecast.deepdey.me](https://goodforecast.deepdey.me)![Node.js](https://img.shields.io/badge/Node.js-Express-green)![Docker](https://img.shields.io/badge/docker-ready-blue)
 
-- ⌨️ **Keyboard Navigation** - Arrow keys and Enter support for search- [DevOps Pipeline](#-devops-pipeline)
 
-- 🌓 **Dark Theme** - Beautiful dark UI with gradient backgrounds- [API Documentation](#-api-documentation)
 
-- 📱 **Fully Responsive** - Works seamlessly on desktop, tablet, and mobile- [Testing](#-testing)
+## 🏗️ Architecture![License](https://img.shields.io/badge/License-MIT-yellow)
 
-- 🚀 **Auto-location** - Detects user location or defaults to NYC- [Deployment](#-deployment)
 
-- 🔔 **Toast Notifications** - User-friendly error messages- [Contributing](#-contributing)
 
-- 🕐 **Local Time Display** - Shows current time with sunrise/sunset
+```---
 
----
+┌─────────────────────────────────────────────────────────────────┐
 
-## 🛠️ Tech Stack
+│                         GitHub Repository                        │## ✨ Features
 
-## ✨ Features
+│                    (Source Code Management)                      │
 
-### Frontend
+└────────────────────────┬────────────────────────────────────────┘## 📋 Table of Contents
 
-- **React 19.1.1** - UI library### Application Features
+                         │ Push/Commit
 
-- **Vite 7.1.12** - Build tool and dev server- 🌡️ Real-time weather data for any city
+                         │ SCM Polling (Every 5 min)- 🌍 **Real-time Weather Data** - Get current weather for any city worldwide
 
-- **Tailwind CSS 3.4.1** - Utility-first CSS framework- 📍 Weather by coordinates (latitude/longitude)
+                         ▼
 
-- **DaisyUI 5.3.10** - Component library (Dark theme)- 📅 5-day weather forecast
+┌─────────────────────────────────────────────────────────────────┐- 📅 **5-Day Forecast** - View detailed weather predictions with custom GIFs- [Features](#-features)
 
-- **Leaflet 1.9.4** - Interactive maps- 🔍 City search with autocomplete
+│                      Jenkins CI/CD Pipeline                      │
 
-- **React Leaflet 5.0.0** - React components for Leaflet- 🌓 Beautiful, responsive UI with Tailwind CSS
+│  ┌──────────────────────────────────────────────────────────┐  │- 💨 **Air Quality Index** - Monitor air pollution levels with visual indicators- [Tech Stack](#-tech-stack)
 
-- **React Hot Toast 2.6.0** - Toast notifications- 📱 Mobile-friendly design
+│  │ 1. Checkout      → Git clone repository                  │  │
 
-- **Axios 1.13.1** - HTTP client
+│  │ 2. Dependencies  → npm ci (Backend & Frontend)           │  │- 🗺️ **Interactive Map** - Click anywhere on the map to get weather data- [Project Structure](#-project-structure)
+
+│  │ 3. Tests         → Jest unit tests + coverage            │  │
+
+│  │ 4. Build         → Docker images (multi-stage)           │  │- 🔍 **Smart Search** - Autocomplete search with geocoding API- [Quick Start](#-quick-start)
+
+│  │ 5. Deploy        → Test environment (Docker Compose)     │  │
+
+│  │ 6. Health Check  → Container health verification         │  │- ⌨️ **Keyboard Navigation** - Arrow keys and Enter support for search- [DevOps Pipeline](#-devops-pipeline)
+
+│  └──────────────────────────────────────────────────────────┘  │
+
+└────────────────────────┬────────────────────────────────────────┘- 🌓 **Dark Theme** - Beautiful dark UI with gradient backgrounds- [API Documentation](#-api-documentation)
+
+                         │
+
+                         ▼- 📱 **Fully Responsive** - Works seamlessly on desktop, tablet, and mobile- [Testing](#-testing)
+
+┌─────────────────────────────────────────────────────────────────┐
+
+│                    Docker Hub Registry                           │- 🚀 **Auto-location** - Detects user location or defaults to NYC- [Deployment](#-deployment)
+
+│         deepdey01/weather-app-backend:latest                    │
+
+│         deepdey01/weather-app-frontend:latest                   │- 🔔 **Toast Notifications** - User-friendly error messages- [Contributing](#-contributing)
+
+└─────────────────────────────────────────────────────────────────┘
+
+                         │- 🕐 **Local Time Display** - Shows current time with sunrise/sunset
+
+            ┌────────────┴────────────┐
+
+            ▼                         ▼---
+
+┌──────────────────────┐    ┌──────────────────────┐
+
+│  Test Environment    │    │  Production (Vercel) │## 🛠️ Tech Stack
+
+│   localhost:5001     │    │ goodforecast.deepdey │
+
+│   localhost:3001     │    │       .me            │## ✨ Features
+
+└──────────────────────┘    └──────────────────────┘
+
+```### Frontend
+
+
+
+## 🚀 Tech Stack- **React 19.1.1** - UI library### Application Features
+
+
+
+### Frontend- **Vite 7.1.12** - Build tool and dev server- 🌡️ Real-time weather data for any city
+
+- **Framework:** React 19.1.1 with Vite
+
+- **Styling:** TailwindCSS + DaisyUI- **Tailwind CSS 3.4.1** - Utility-first CSS framework- 📍 Weather by coordinates (latitude/longitude)
+
+- **Mapping:** React Leaflet, Mapbox GL
+
+- **3D Visualization:** React Globe GL + Three.js- **DaisyUI 5.3.10** - Component library (Dark theme)- 📅 5-day weather forecast
+
+- **HTTP Client:** Axios
+
+- **Notifications:** React Hot Toast- **Leaflet 1.9.4** - Interactive maps- 🔍 City search with autocomplete
+
+
+
+### Backend- **React Leaflet 5.0.0** - React components for Leaflet- 🌓 Beautiful, responsive UI with Tailwind CSS
+
+- **Runtime:** Node.js 18.20.8
+
+- **Framework:** Express.js- **React Hot Toast 2.6.0** - Toast notifications- 📱 Mobile-friendly design
+
+- **API Integration:** OpenWeatherMap API
+
+- **CORS:** Enabled for cross-origin requests- **Axios 1.13.1** - HTTP client
+
+- **Environment:** dotenv configuration
 
 ### DevOps Features
 
-### Backend- 🐳 **Docker** - Containerized application
+### DevOps & Infrastructure
 
-- **Node.js** - Runtime environment- 🔄 **Jenkins** - Automated CI/CD pipeline
+- **CI/CD:** Jenkins 2.528.1 LTS (Pipeline as Code)### Backend- 🐳 **Docker** - Containerized application
 
-- **Express 4.18.2** - Web framework- 📊 **SonarQube** - Code quality analysis
+- **Containerization:** Docker 28.5.1 + Docker Compose V2
 
-- **Axios 1.4.0** - API requests- 🧪 **Jest** - Automated testing
+- **Testing:** Jest with 41% code coverage- **Node.js** - Runtime environment- 🔄 **Jenkins** - Automated CI/CD pipeline
 
-- **CORS** - Cross-origin resource sharing- 📈 **Code Coverage** - Test coverage reports
+- **Code Quality:** SonarQube LTS (configured)
 
-- **dotenv** - Environment variable management- 🚀 **Vercel** - Production deployment
+- **Registry:** Docker Hub (deepdey01)- **Express 4.18.2** - Web framework- 📊 **SonarQube** - Code quality analysis
 
+- **Deployment:** Vercel (Production), Docker (Test)
 
-
-### APIs---
-
-- **OpenWeatherMap API** - Weather data, forecasts, and geocoding
-
-- **OpenStreetMap** - Map tiles and weather overlay## 🛠️ Tech Stack
+- **Version Control:** Git + GitHub- **Axios 1.4.0** - API requests- 🧪 **Jest** - Automated testing
 
 
 
-## 📁 Project Structure### Frontend
+## 📋 Prerequisites- **CORS** - Cross-origin resource sharing- 📈 **Code Coverage** - Test coverage reports
+
+
+
+- **Node.js:** 18.x or higher- **dotenv** - Environment variable management- 🚀 **Vercel** - Production deployment
+
+- **Docker:** 28.x or higher
+
+- **Docker Compose:** V2 (plugin-based)
+
+- **Git:** Latest version
+
+- **OpenWeatherMap API Key:** [Get free key](https://openweathermap.org/api)### APIs---
+
+
+
+## 🔧 Installation & Setup- **OpenWeatherMap API** - Weather data, forecasts, and geocoding
+
+
+
+### 1. Clone Repository- **OpenStreetMap** - Map tiles and weather overlay## 🛠️ Tech Stack
+
+
+
+```bash
+
+git clone https://github.com/Deep-Dey1/GoodForecast.git
+
+cd GoodForecast## 📁 Project Structure### Frontend
+
+```
 
 - React 18
 
+### 2. Environment Configuration
+
 ```- Tailwind CSS
+
+Create `.env` file in the `backend/` directory:
 
 weatherApp/- Axios
 
-├── backend/                 # Node.js/Express backend- React Router
-
-│   ├── src/
-
-│   │   ├── controllers/    # Request handlers### Backend
-
-│   │   ├── routes/         # API routes- Node.js
-
-│   │   ├── services/       # Business logic- Express.js
-
-│   │   ├── middleware/     # Custom middleware- OpenWeatherMap API
-
-│   │   ├── utils/          # Utility functions- CORS
-
-│   │   └── server.js       # Entry point- Dotenv
-
-│   ├── package.json
-
-│   └── README.md### DevOps
-
-├── frontend/               # React frontend- **Version Control:** Git + GitHub
-
-│   ├── src/- **CI/CD:** Jenkins
-
-│   │   ├── components/    # React components- **Containerization:** Docker + Docker Compose
-
-│   │   ├── services/      # API services- **Code Quality:** SonarQube
-
-│   │   └── App.jsx        # Main component- **Testing:** Jest + Supertest
-
-│   ├── public/- **Deployment:** Vercel
-
-│   ├── package.json
-
-│   └── README.md---
-
-├── vercel.json            # Vercel deployment config
-
-├── DEPLOYMENT_GUIDE.md    # Deployment instructions## 📁 Project Structure
-
-└── README.md              # This file
-
-``````
-
-weatherApp/
-
-## 🚀 Quick Start├── backend/                    # Backend API
-
-│   ├── src/
-
-### Prerequisites│   │   ├── controllers/       # Request handlers
-
-- Node.js (v16 or higher)│   │   ├── middleware/        # Custom middleware
-
-- npm or yarn│   │   ├── routes/           # API routes
-
-- OpenWeatherMap API key ([Get it free](https://openweathermap.org/api))│   │   ├── services/         # Business logic
-
-│   │   ├── utils/            # Utilities
-
-### Installation│   │   └── server.js         # Entry point
-
-│   ├── tests/                # Test files
-
-1. **Clone the repository**│   ├── .env                  # Environment variables
-
-```bash│   ├── Dockerfile           # Backend container
-
-git clone https://github.com/Deep-Dey1/GoodForecast.git│   └── package.json
-
-cd GoodForecast│
-
-```├── frontend/                  # React frontend
-
-│   ├── src/
-
-2. **Setup Backend**│   │   ├── components/       # React components
-
-```bash│   │   ├── pages/           # Page components
-
-cd backend│   │   ├── services/        # API calls
-
-npm install│   │   └── App.jsx
-
-```│   ├── Dockerfile           # Frontend container
-
-│   └── package.json
-
-Create `.env` file in backend folder:│
-
-```env├── docker-compose.yml        # Multi-container orchestration
-
-PORT=5000├── Jenkinsfile              # CI/CD pipeline definition
-
-OPENWEATHER_API_KEY=your_api_key_here├── DEVOPS_GUIDE.md          # Complete DevOps setup guide
-
-NODE_ENV=development├── GETTING_STARTED.md       # Quick start guide
-
-ALLOWED_ORIGINS=http://localhost:5173└── README.md                # This file
-
-``````
-
-
-
-3. **Setup Frontend**---
-
 ```bash
 
-cd frontend## 🚀 Quick Start
-
-npm install
-
-```### Prerequisites
-
-- Node.js (v14 or higher)
-
-Create `.env` file in frontend folder (optional):- npm or yarn
-
-```env- Docker Desktop (for containerization)
-
-VITE_API_URL=http://localhost:5000/api- Git
-
-VITE_OPENWEATHER_API_KEY=your_api_key_here
-
-```### 1. Clone the Repository
-
-```bash
-
-### Running Locallygit clone https://github.com/yourusername/weatherApp.git
-
-cd weatherApp
-
-**Development Mode (Separate servers):**```
-
-
-
-```bash### 2. Backend Setup
-
-# Terminal 1 - Backend
-
-cd backend```bash
-
-npm run devcd backend
-
-
-
-# Terminal 2 - Frontend# Install dependencies
-
-cd frontendnpm install
-
-npm run dev
-
-```# Create .env file from example
+cd backend├── backend/                 # Node.js/Express backend- React Router
 
 cp .env.example .env
 
-Access the app at `http://localhost:5173`
-
-# Add your OpenWeatherMap API key to .env
-
-**Production Mode (Single server):**# Get free API key from: https://openweathermap.org/api
+```│   ├── src/
 
 
 
-```bash# Start development server
-
-# Build frontendnpm run dev
-
-cd frontend```
-
-npm run build
-
-Backend will run on `http://localhost:5000`
-
-# Start backend (serves frontend)
-
-cd backend### 3. Frontend Setup (Coming Soon)
-
-NODE_ENV=production npm start
-
-``````bash
-
-cd frontend
-
-Access the app at `http://localhost:5000`
-
-# Install dependencies
-
-## 🌐 Deploymentnpm install
+Edit `.env` and add your OpenWeatherMap API key:│   │   ├── controllers/    # Request handlers### Backend
 
 
 
-The app is configured for easy deployment to Vercel. See [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) for detailed instructions.# Start development server
+```env│   │   ├── routes/         # API routes- Node.js
 
-npm start
+OPENWEATHER_API_KEY=your_api_key_here
 
-**Quick Deploy:**```
-
-```bash
-
-npm install -g vercelFrontend will run on `http://localhost:3000`
-
-vercel login
-
-vercel --prod### 4. Using Docker
+PORT=5000│   │   ├── services/       # Business logic- Express.js
 
 ```
 
+│   │   ├── middleware/     # Custom middleware- OpenWeatherMap API
+
+### 3. Local Development (Without Docker)
+
+│   │   ├── utils/          # Utility functions- CORS
+
+**Backend:**
+
+```bash│   │   └── server.js       # Entry point- Dotenv
+
+cd backend
+
+npm install│   ├── package.json
+
+npm run dev          # Development with nodemon
+
+# OR│   └── README.md### DevOps
+
+npm start            # Production mode
+
+```├── frontend/               # React frontend- **Version Control:** Git + GitHub
+
+
+
+**Frontend:**│   ├── src/- **CI/CD:** Jenkins
+
 ```bash
 
-Don't forget to add your `OPENWEATHER_API_KEY` environment variable in Vercel!# Build and run all services
+cd frontend│   │   ├── components/    # React components- **Containerization:** Docker + Docker Compose
 
-docker-compose up --build
+npm install
 
-## 📚 API Documentation
-
-# Run in background
-
-### Backend API Endpointsdocker-compose up -d
-
-
-
-- `GET /api/health` - Health check# Stop all services
-
-- `GET /api/weather/city/:cityName` - Get weather by city namedocker-compose down
-
-- `GET /api/weather/coordinates?lat=&lon=` - Get weather by coordinates```
-
-- `GET /api/weather/forecast/:cityName` - Get 5-day forecast
-
-- `GET /api/weather/air-quality?lat=&lon=` - Get air quality data---
-
-- `GET /api/weather/search/:query` - Search cities (geocoding)
-
-## 🔄 DevOps Pipeline
-
-See [backend/README.md](./backend/README.md) for detailed API documentation.
-
-### CI/CD Flow
-
-## 🎨 Features in Detail
+npm run dev          # Starts on http://localhost:5173│   │   ├── services/      # API services- **Code Quality:** SonarQube
 
 ```
 
-### Weather DisplayGitHub Push
+│   │   └── App.jsx        # Main component- **Testing:** Jest + Supertest
 
-- Current temperature, feels like, humidity, pressure    ↓
+### 4. Docker Development
 
-- Weather condition with custom animated GIFsJenkins Webhook Trigger
+│   ├── public/- **Deployment:** Vercel
 
-- Wind speed and direction    ↓
+**Option A: Full Stack**
 
-- Min/max temperatures┌─────────────────────────────┐
+```bash│   ├── package.json
 
-│  Checkout Code              │
+docker compose up --build
 
-### 5-Day Forecast└─────────────────────────────┘
+# Backend: http://localhost:5000│   └── README.md---
 
-- Daily weather predictions    ↓
+# Frontend: http://localhost:3000
 
-- Custom GIFs for 7 weather conditions (Clear, Heavy Rain, Light Rain, Thunder, Snow, Mist, Cloudy)┌─────────────────────────────┐
+```├── vercel.json            # Vercel deployment config
 
-- Min/max temperatures for each day│  Install Dependencies       │
 
-- Chance of rain percentage│  - Backend                  │
 
-│  - Frontend                 │
+**Option B: Test Environment (CI/CD Ports)**├── DEPLOYMENT_GUIDE.md    # Deployment instructions## 📁 Project Structure
 
-### Air Quality Index└─────────────────────────────┘
+```bash
 
-- Overall AQI score with color-coded levels (Good, Fair, Moderate, Poor, Very Poor)    ↓
+docker compose -f docker-compose.test.yml up└── README.md              # This file
 
-- 8 pollutant measurements: PM2.5, PM10, O₃, NO₂, SO₂, CO, NO, NH₃┌─────────────────────────────┐
+# Backend: http://localhost:5001
 
-- Custom GIFs for 5 AQI levels│  Run Tests                  │
+# Frontend: http://localhost:3001``````
 
-- Side-by-side card layout with detailed information│  - Unit Tests               │
+```
 
-│  - Integration Tests        │
+weatherApp/
 
-### Interactive Map└─────────────────────────────┘
+## 🔄 DevOps Implementation
 
-- Click anywhere to get weather    ↓
+## 🚀 Quick Start├── backend/                    # Backend API
 
-- Weather layer overlay┌─────────────────────────────┐
+### CI/CD Pipeline Architecture
 
-- Current location marker│  SonarQube Analysis         │
+│   ├── src/
 
-- Smooth animations│  - Code Quality             │
+The project uses **Jenkins Pipeline as Code** with the following stages:
 
-│  - Security Scan            │
+### Prerequisites│   │   ├── controllers/       # Request handlers
 
-### Smart Search│  - Code Coverage            │
+1. **Checkout** - Clone repository from GitHub
 
-- Autocomplete with city suggestions└─────────────────────────────┘
+2. **Install Dependencies** - `npm ci` for backend and frontend- Node.js (v16 or higher)│   │   ├── middleware/        # Custom middleware
 
-- Keyboard navigation (↑↓ arrows, Enter, Escape)    ↓
+3. **Run Tests** - Jest unit tests with coverage reporting
 
-- Shows city name, state, and country┌─────────────────────────────┐
+4. **SonarQube Analysis** - Code quality and security scanning (non-blocking)- npm or yarn│   │   ├── routes/           # API routes
 
-- Coordinate display│  Quality Gate Check         │
+5. **Quality Gate** - SonarQube quality validation
 
-- Dropdown closes properly after selection└─────────────────────────────┘
+6. **Build Docker Images** - Multi-stage builds for optimized images- OpenWeatherMap API key ([Get it free](https://openweathermap.org/api))│   │   ├── services/         # Business logic
+
+7. **Deploy** - Deploy to test environment using Docker Compose
+
+8. **Health Check** - Verify container health status│   │   ├── utils/            # Utilities
+
+
+
+### Jenkins Configuration### Installation│   │   └── server.js         # Entry point
+
+
+
+**Pipeline Job:** Weather-App-Pipeline│   ├── tests/                # Test files
+
+- **Type:** Pipeline (Declarative)
+
+- **SCM:** Git (https://github.com/Deep-Dey1/GoodForecast.git)1. **Clone the repository**│   ├── .env                  # Environment variables
+
+- **Branch:** main
+
+- **Script Path:** Jenkinsfile```bash│   ├── Dockerfile           # Backend container
+
+- **Triggers:** SCM Polling (H/5 * * * *) - Every 5 minutes
+
+git clone https://github.com/Deep-Dey1/GoodForecast.git│   └── package.json
+
+**Required Plugins:**
+
+- NodeJS Plugincd GoodForecast│
+
+- Docker Pipeline
+
+- Docker Plugin```├── frontend/                  # React frontend
+
+- SonarQube Scanner
+
+- Git Plugin│   ├── src/
+
+
+
+**Configured Tools:**2. **Setup Backend**│   │   ├── components/       # React components
+
+- NodeJS-18 (Node.js 18.x)
+
+- docker (Docker CLI)```bash│   │   ├── pages/           # Page components
+
+- SonarQubeScanner
+
+cd backend│   │   ├── services/        # API calls
+
+**Credentials:**
+
+- `dockerhub-credentials` - Docker Hub (deepdey01)npm install│   │   └── App.jsx
+
+- `sonarqube-token` - SonarQube authentication
+
+```│   ├── Dockerfile           # Frontend container
+
+### Infrastructure Services
+
+│   └── package.json
+
+Start CI/CD infrastructure:
+
+Create `.env` file in backend folder:│
+
+```bash
+
+docker compose -f docker-compose.cicd.yml up -d```env├── docker-compose.yml        # Multi-container orchestration
+
+```
+
+PORT=5000├── Jenkinsfile              # CI/CD pipeline definition
+
+**Services:**
+
+- **Jenkins:** http://localhost:8080 (CI/CD automation)OPENWEATHER_API_KEY=your_api_key_here├── DEVOPS_GUIDE.md          # Complete DevOps setup guide
+
+- **SonarQube:** http://localhost:9000 (Code quality)
+
+- **PostgreSQL:** Port 5432 (SonarQube database)NODE_ENV=development├── GETTING_STARTED.md       # Quick start guide
+
+- **Docker Registry:** Port 5000 (Local image registry)
+
+ALLOWED_ORIGINS=http://localhost:5173└── README.md                # This file
+
+### Docker Images
+
+``````
+
+**Backend Image:**
+
+```dockerfile
+
+FROM node:18-alpine (builder)
+
+WORKDIR /usr/src/app3. **Setup Frontend**---
+
+COPY package*.json ./
+
+RUN npm ci --only=production```bash
+
+COPY . .
+
+EXPOSE 5000cd frontend## 🚀 Quick Start
+
+CMD ["node", "src/server.js"]
+
+```npm install
+
+
+
+**Frontend Image:**```### Prerequisites
+
+```dockerfile
+
+FROM node:18-alpine (builder)- Node.js (v14 or higher)
+
+WORKDIR /app
+
+RUN npm ci && npm run buildCreate `.env` file in frontend folder (optional):- npm or yarn
+
+
+
+FROM nginx:alpine (production)```env- Docker Desktop (for containerization)
+
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+EXPOSE 80VITE_API_URL=http://localhost:5000/api- Git
+
+```
+
+VITE_OPENWEATHER_API_KEY=your_api_key_here
+
+**Published Images:**
+
+- `deepdey01/weather-app-backend:latest````### 1. Clone the Repository
+
+- `deepdey01/weather-app-frontend:latest`
+
+```bash
+
+### Testing Strategy
+
+### Running Locallygit clone https://github.com/yourusername/weatherApp.git
+
+**Backend Tests (Jest):**
+
+- Unit tests for API endpointscd weatherApp
+
+- Weather service integration tests
+
+- Error handling validation**Development Mode (Separate servers):**```
+
+- Current Coverage: 41%
+
+- Coverage Threshold: 30% minimum
+
+
+
+**Test Execution:**```bash### 2. Backend Setup
+
+```bash
+
+cd backend# Terminal 1 - Backend
+
+npm test              # Run tests with coverage
+
+npm run test:watch    # Watch mode for developmentcd backend```bash
+
+```
+
+npm run devcd backend
+
+**Test Results (Latest Build #16):**
+
+- Total Tests: 8
+
+- Passed: 8 (100%)
+
+- Failed: 0# Terminal 2 - Frontend# Install dependencies
+
+- Execution Time: 2.2s
+
+cd frontendnpm install
+
+### Automated Deployment Flow
+
+npm run dev
+
+```
+
+Developer Push → GitHub → Jenkins Polling → Build Trigger```# Create .env file from example
 
     ↓
 
-### Responsive Design┌─────────────────────────────┐
+Checkout Code → Install Dependencies → Run Testscp .env.example .env
 
-- **Desktop (≥1024px)**: Two-column layout with fixed navbar, 5 forecast cards│  Build Docker Images        │
+    ↓
 
-- **Mobile (<1024px)**: Vertical scroll with fixed navbar, 4 forecast cards in 2x2 grid│  - Backend Image            │
+Build Docker Images → Tag with Build NumberAccess the app at `http://localhost:5173`
+
+    ↓
+
+Deploy to Test Environment (ports 5001, 3001)# Add your OpenWeatherMap API key to .env
+
+    ↓
+
+Health Check (Docker inspect) → SUCCESS**Production Mode (Single server):**# Get free API key from: https://openweathermap.org/api
+
+    ↓
+
+Notification: Build #XX SUCCESS ✅
+
+```
+
+```bash# Start development server
+
+## 📊 Monitoring & Verification
+
+# Build frontendnpm run dev
+
+### Health Checks
+
+cd frontend```
+
+The pipeline verifies deployment health using Docker's built-in health status:
+
+npm run build
+
+```bash
+
+# Check backend healthBackend will run on `http://localhost:5000`
+
+docker inspect --format="{{.State.Health.Status}}" weather-app-backend-test
+
+# Start backend (serves frontend)
+
+# Check frontend status
+
+docker inspect --format="{{.State.Status}}" weather-app-frontend-testcd backend### 3. Frontend Setup (Coming Soon)
+
+```
+
+NODE_ENV=production npm start
+
+### Container Logs
+
+``````bash
+
+```bash
+
+# Backend logscd frontend
+
+docker logs weather-app-backend-test
+
+Access the app at `http://localhost:5000`
+
+# Frontend logs
+
+docker logs weather-app-frontend-test# Install dependencies
+
+
+
+# Jenkins logs## 🌐 Deploymentnpm install
+
+docker logs weather-app-jenkins
+
+```
+
+
+
+### Access URLsThe app is configured for easy deployment to Vercel. See [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) for detailed instructions.# Start development server
+
+
+
+- **Production:** https://goodforecast.deepdey.menpm start
+
+- **Test Backend API:** http://localhost:5001/api/weather?city=London
+
+- **Test Frontend:** http://localhost:3001**Quick Deploy:**```
+
+- **Jenkins Dashboard:** http://localhost:8080
+
+- **SonarQube Dashboard:** http://localhost:9000```bash
+
+
+
+## 🔐 Security & Best Practicesnpm install -g vercelFrontend will run on `http://localhost:3000`
+
+
+
+- ✅ Environment variables for sensitive datavercel login
+
+- ✅ `.dockerignore` for optimized image builds
+
+- ✅ Multi-stage Docker builds (reduced image size)vercel --prod### 4. Using Docker
+
+- ✅ Non-root user in containers
+
+- ✅ Health checks for container monitoring```
+
+- ✅ CORS configuration for API security
+
+- ✅ Automated security scanning with SonarQube```bash
+
+- ✅ Git hooks for pre-commit validation
+
+Don't forget to add your `OPENWEATHER_API_KEY` environment variable in Vercel!# Build and run all services
+
+## 📈 Performance Optimizations
+
+docker-compose up --build
+
+- **Docker Layer Caching:** Dependencies cached separately
+
+- **Multi-stage Builds:** Smaller production images## 📚 API Documentation
+
+- **Nginx for Frontend:** Optimized static file serving
+
+- **Node.js Production Mode:** Enhanced performance# Run in background
+
+- **Build Artifacts:** Images tagged with build numbers
+
+### Backend API Endpointsdocker-compose up -d
+
+## 🛠️ Troubleshooting
+
+
+
+### Common Issues
+
+- `GET /api/health` - Health check# Stop all services
+
+**Port Conflicts:**
+
+```bash- `GET /api/weather/city/:cityName` - Get weather by city namedocker-compose down
+
+# Check what's using a port
+
+netstat -ano | grep :8080- `GET /api/weather/coordinates?lat=&lon=` - Get weather by coordinates```
+
+
+
+# Use test environment with different ports- `GET /api/weather/forecast/:cityName` - Get 5-day forecast
+
+docker compose -f docker-compose.test.yml up
+
+```- `GET /api/weather/air-quality?lat=&lon=` - Get air quality data---
+
+
+
+**Docker Permission Issues:**- `GET /api/weather/search/:query` - Search cities (geocoding)
+
+```bash
+
+# Add user to docker group (Linux)## 🔄 DevOps Pipeline
+
+sudo usermod -aG docker $USER
+
+See [backend/README.md](./backend/README.md) for detailed API documentation.
+
+# Restart Docker service
+
+sudo systemctl restart docker### CI/CD Flow
+
+```
+
+## 🎨 Features in Detail
+
+**Jenkins Container Can't Run Docker:**
+
+```bash```
+
+# Verify Docker CLI installed in Jenkins
+
+docker exec weather-app-jenkins docker --version### Weather DisplayGitHub Push
+
+
+
+# Recreate Jenkins with Docker CLI- Current temperature, feels like, humidity, pressure    ↓
+
+docker compose -f docker-compose.cicd.yml up -d --force-recreate jenkins
+
+```- Weather condition with custom animated GIFsJenkins Webhook Trigger
+
+
+
+## 📝 Project Structure- Wind speed and direction    ↓
+
+
+
+```- Min/max temperatures┌─────────────────────────────┐
+
+GoodForecast/
+
+├── backend/              # Node.js/Express API│  Checkout Code              │
+
+│   ├── src/
+
+│   │   ├── controllers/  # Route controllers### 5-Day Forecast└─────────────────────────────┘
+
+│   │   ├── services/     # Business logic
+
+│   │   ├── routes/       # API routes- Daily weather predictions    ↓
+
+│   │   ├── middleware/   # Custom middleware
+
+│   │   └── utils/        # Helper functions- Custom GIFs for 7 weather conditions (Clear, Heavy Rain, Light Rain, Thunder, Snow, Mist, Cloudy)┌─────────────────────────────┐
+
+│   ├── tests/            # Jest tests
+
+│   ├── Dockerfile        # Backend container- Min/max temperatures for each day│  Install Dependencies       │
+
+│   ├── README.md         # Backend documentation
+
+│   └── package.json- Chance of rain percentage│  - Backend                  │
+
+├── frontend/             # React/Vite application
+
+│   ├── src/│  - Frontend                 │
+
+│   │   ├── components/   # React components
+
+│   │   ├── services/     # API clients### Air Quality Index└─────────────────────────────┘
+
+│   │   └── assets/       # Static resources
+
+│   ├── Dockerfile        # Frontend container- Overall AQI score with color-coded levels (Good, Fair, Moderate, Poor, Very Poor)    ↓
+
+│   ├── README.md         # Frontend documentation
+
+│   └── package.json- 8 pollutant measurements: PM2.5, PM10, O₃, NO₂, SO₂, CO, NO, NH₃┌─────────────────────────────┐
+
+├── Jenkinsfile           # CI/CD pipeline definition
+
+├── docker-compose.yml    # Main application stack- Custom GIFs for 5 AQI levels│  Run Tests                  │
+
+├── docker-compose.test.yml      # Test environment
+
+├── docker-compose.cicd.yml      # CI/CD infrastructure- Side-by-side card layout with detailed information│  - Unit Tests               │
+
+├── sonar-project.properties     # SonarQube config
+
+├── vercel.json           # Vercel deployment config│  - Integration Tests        │
+
+└── README.md             # This file
+
+```### Interactive Map└─────────────────────────────┘
+
+
+
+## 🤝 Contributing- Click anywhere to get weather    ↓
+
+
+
+1. Fork the repository- Weather layer overlay┌─────────────────────────────┐
+
+2. Create feature branch (`git checkout -b feature/AmazingFeature`)
+
+3. Commit changes (`git commit -m 'Add some AmazingFeature'`)- Current location marker│  SonarQube Analysis         │
+
+4. Push to branch (`git push origin feature/AmazingFeature`)
+
+5. Open Pull Request- Smooth animations│  - Code Quality             │
+
+
+
+## 📄 License│  - Security Scan            │
+
+
+
+This project is licensed under the ISC License.### Smart Search│  - Code Coverage            │
+
+
+
+## 👤 Author- Autocomplete with city suggestions└─────────────────────────────┘
+
+
+
+**Deep Dey**- Keyboard navigation (↑↓ arrows, Enter, Escape)    ↓
+
+- GitHub: [@Deep-Dey1](https://github.com/Deep-Dey1)
+
+- Docker Hub: [deepdey01](https://hub.docker.com/u/deepdey01)- Shows city name, state, and country┌─────────────────────────────┐
+
+
+
+## 🙏 Acknowledgments- Coordinate display│  Quality Gate Check         │
+
+
+
+- OpenWeatherMap API for weather data- Dropdown closes properly after selection└─────────────────────────────┘
+
+- Jenkins for CI/CD automation
+
+- Docker for containerization    ↓
+
+- Vercel for production hosting
+
+- SonarQube for code quality analysis### Responsive Design┌─────────────────────────────┐
+
+
+
+---- **Desktop (≥1024px)**: Two-column layout with fixed navbar, 5 forecast cards│  Build Docker Images        │
+
+
+
+**Build Status:** ✅ Build #16 - SUCCESS (All stages passed)  - **Mobile (<1024px)**: Vertical scroll with fixed navbar, 4 forecast cards in 2x2 grid│  - Backend Image            │
+
+**Last Updated:** November 2025
 
 - **Tablet**: Optimized layouts for mid-size screens│  - Frontend Image           │
 
