@@ -134,20 +134,20 @@ pipeline {
         
         stage('Deploy - Local Test') {
             steps {
-                echo '🚀 Deploying to local environment...'
+                echo '🚀 Deploying to local test environment...'
                 script {
-                    // Stop existing containers by name
-                    sh 'docker stop weather-app-backend weather-app-frontend || true'
-                    sh 'docker rm weather-app-backend weather-app-frontend || true'
+                    // Stop existing test containers
+                    sh 'docker stop weather-app-backend-test weather-app-frontend-test || true'
+                    sh 'docker rm weather-app-backend-test weather-app-frontend-test || true'
                     
-                    // Stop containers using docker compose
-                    sh 'docker compose down || true'
+                    // Stop containers using docker compose test file
+                    sh 'docker compose -f docker-compose.test.yml down || true'
                     
-                    // Start new containers
-                    sh 'docker compose up -d'
+                    // Start new containers with test configuration (different ports)
+                    sh 'docker compose -f docker-compose.test.yml up -d'
                     
                     // Wait for services to be ready
-                    sleep 10
+                    sleep 15
                 }
             }
         }
@@ -156,11 +156,11 @@ pipeline {
             steps {
                 echo '🏥 Performing health checks...'
                 script {
-                    // Check backend health
-                    sh 'curl -f http://localhost:5000/api/health || exit 1'
+                    // Check backend health on test port 5001
+                    sh 'curl -f http://localhost:5001/api/health || exit 1'
                     
-                    // Check frontend (if applicable)
-                    sh 'curl -f http://localhost:3000 || exit 0'
+                    // Check frontend on test port 3001
+                    sh 'curl -f http://localhost:3001 || exit 0'
                 }
             }
         }
