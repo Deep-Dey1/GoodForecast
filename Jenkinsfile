@@ -156,11 +156,26 @@ pipeline {
             steps {
                 echo '🏥 Performing health checks...'
                 script {
-                    // Check backend health on test port 5001
-                    sh 'curl -f http://localhost:5001/api/health || exit 1'
+                    // Wait for containers to be fully ready
+                    echo 'Waiting for services to start...'
+                    sleep 20
                     
-                    // Check frontend on test port 3001
-                    sh 'curl -f http://localhost:3001 || exit 0'
+                    // Check backend container logs
+                    echo 'Checking backend logs...'
+                    sh 'docker logs weather-app-backend-test --tail 20 || true'
+                    
+                    // Check if backend container is running
+                    sh 'docker ps | grep weather-app-backend-test'
+                    
+                    // Check backend health from Docker network
+                    echo 'Testing backend health...'
+                    sh 'docker exec weather-app-backend-test curl -f http://localhost:5000/api/health || exit 1'
+                    
+                    // Check if frontend container is running
+                    echo 'Testing frontend availability...'
+                    sh 'docker ps | grep weather-app-frontend-test'
+                    
+                    echo '✅ All health checks passed!'
                 }
             }
         }
