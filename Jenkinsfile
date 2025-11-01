@@ -6,9 +6,10 @@ pipeline {
     }
     
     environment {
-        DOCKER_IMAGE_BACKEND = 'weather-app-backend'
-        DOCKER_IMAGE_FRONTEND = 'weather-app-frontend'
+        DOCKER_IMAGE_BACKEND = 'deepdey01/weather-app-backend'
+        DOCKER_IMAGE_FRONTEND = 'deepdey01/weather-app-frontend'
         SONAR_PROJECT_KEY = 'weather-app'
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')
     }
     
     stages {
