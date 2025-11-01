@@ -162,20 +162,29 @@ pipeline {
                     
                     // Check backend container logs
                     echo 'Checking backend logs...'
-                    sh 'docker logs weather-app-backend-test --tail 20 || true'
+                    sh 'docker logs weather-app-backend-test --tail 20'
                     
-                    // Check if backend container is running
-                    sh 'docker ps | grep weather-app-backend-test'
+                    // Check if backend container is running and healthy
+                    echo 'Verifying backend container status...'
+                    def backendStatus = sh(
+                        script: 'docker inspect --format="{{.State.Health.Status}}" weather-app-backend-test',
+                        returnStdout: true
+                    ).trim()
                     
-                    // Check backend health from Docker network
-                    echo 'Testing backend health...'
-                    sh 'docker exec weather-app-backend-test curl -f http://localhost:5000/api/health || exit 1'
+                    if (backendStatus != 'healthy') {
+                        error("Backend container is not healthy: ${backendStatus}")
+                    }
+                    echo "✅ Backend is ${backendStatus}"
                     
                     // Check if frontend container is running
-                    echo 'Testing frontend availability...'
+                    echo 'Checking frontend logs...'
+                    sh 'docker logs weather-app-frontend-test --tail 20'
+                    
+                    echo 'Verifying frontend container status...'
                     sh 'docker ps | grep weather-app-frontend-test'
                     
                     echo '✅ All health checks passed!'
+                    echo '🎉 Deployment successful!'
                 }
             }
         }
