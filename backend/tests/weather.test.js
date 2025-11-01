@@ -14,7 +14,7 @@ describe('Weather API Endpoints', () => {
 
     it('should return 400 for city name with special characters', async () => {
       const response = await request(app)
-        .get('/api/weather/city/@#$%')
+        .get('/api/weather/city/Test@#$%City')
         .expect(400);
 
       expect(response.body).toHaveProperty('success', false);
