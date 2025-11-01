@@ -61,7 +61,7 @@ pipeline {
                 echo '📊 Running SonarQube analysis for backend...'
                 dir('backend') {
                     script {
-                        def scannerHome = tool 'SonarScanner'
+                        def scannerHome = tool 'SonarQubeScanner'
                         withSonarQubeEnv('SonarQube') {
                             sh """
                                 ${scannerHome}/bin/sonar-scanner \
@@ -83,7 +83,7 @@ pipeline {
                 echo '📊 Running SonarQube analysis for frontend...'
                 dir('frontend') {
                     script {
-                        def scannerHome = tool 'SonarScanner'
+                        def scannerHome = tool 'SonarQubeScanner'
                         withSonarQubeEnv('SonarQube') {
                             sh """
                                 ${scannerHome}/bin/sonar-scanner \
