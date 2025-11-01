@@ -137,10 +137,10 @@ pipeline {
                 echo '🚀 Deploying to local environment...'
                 script {
                     // Stop existing containers
-                    sh 'docker-compose down || exit 0'
+                    sh 'docker compose down || exit 0'
                     
                     // Start new containers
-                    sh 'docker-compose up -d'
+                    sh 'docker compose up -d'
                     
                     // Wait for services to be ready
                     sleep 10
