@@ -12,12 +12,13 @@ describe('Weather API Endpoints', () => {
       expect(response.body).toHaveProperty('message');
     });
 
-    it('should return 400 for empty city name', async () => {
+    it('should return 400 for city name with special characters', async () => {
       const response = await request(app)
-        .get('/api/weather/city/ ')
+        .get('/api/weather/city/@#$%')
         .expect(400);
 
       expect(response.body).toHaveProperty('success', false);
+      expect(response.body.message).toContain('invalid characters');
     });
   });
 
