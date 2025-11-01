@@ -136,8 +136,12 @@ pipeline {
             steps {
                 echo '🚀 Deploying to local environment...'
                 script {
-                    // Stop existing containers
-                    sh 'docker compose down || exit 0'
+                    // Stop existing containers by name
+                    sh 'docker stop weather-app-backend weather-app-frontend || true'
+                    sh 'docker rm weather-app-backend weather-app-frontend || true'
+                    
+                    // Stop containers using docker compose
+                    sh 'docker compose down || true'
                     
                     // Start new containers
                     sh 'docker compose up -d'
