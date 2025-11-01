@@ -24,7 +24,7 @@ pipeline {
             steps {
                 echo '📦 Installing backend dependencies...'
                 dir('backend') {
-                    bat 'npm ci'
+                    sh 'npm ci'
                 }
             }
         }
@@ -33,7 +33,7 @@ pipeline {
             steps {
                 echo '📦 Installing frontend dependencies...'
                 dir('frontend') {
-                    bat 'npm ci'
+                    sh 'npm ci'
                 }
             }
         }
@@ -42,7 +42,7 @@ pipeline {
             steps {
                 echo '🧪 Running backend tests...'
                 dir('backend') {
-                    bat 'npm test -- --coverage --passWithNoTests'
+                    sh 'npm test -- --coverage --passWithNoTests'
                 }
             }
         }
@@ -51,7 +51,7 @@ pipeline {
             steps {
                 echo '🧪 Running frontend tests...'
                 dir('frontend') {
-                    bat 'npm test -- --passWithNoTests || exit 0'
+                    sh 'npm test -- --passWithNoTests || exit 0'
                 }
             }
         }
@@ -63,8 +63,8 @@ pipeline {
                     script {
                         def scannerHome = tool 'SonarScanner'
                         withSonarQubeEnv('SonarQube') {
-                            bat """
-                                ${scannerHome}\\bin\\sonar-scanner.bat \
+                            sh """
+                                ${scannerHome}/bin/sonar-scanner \
                                 -Dsonar.projectKey=${SONAR_PROJECT_KEY}-backend \
                                 -Dsonar.projectName="Weather App Backend" \
                                 -Dsonar.sources=src \
@@ -85,8 +85,8 @@ pipeline {
                     script {
                         def scannerHome = tool 'SonarScanner'
                         withSonarQubeEnv('SonarQube') {
-                            bat """
-                                ${scannerHome}\\bin\\sonar-scanner.bat \
+                            sh """
+                                ${scannerHome}/bin/sonar-scanner \
                                 -Dsonar.projectKey=${SONAR_PROJECT_KEY}-frontend \
                                 -Dsonar.projectName="Weather App Frontend" \
                                 -Dsonar.sources=src \
@@ -112,10 +112,10 @@ pipeline {
                 echo '🐳 Building Docker images...'
                 script {
                     dir('backend') {
-                        bat "docker build -t ${DOCKER_IMAGE_BACKEND}:${BUILD_NUMBER} -t ${DOCKER_IMAGE_BACKEND}:latest ."
+                        sh "docker build -t ${DOCKER_IMAGE_BACKEND}:${BUILD_NUMBER} -t ${DOCKER_IMAGE_BACKEND}:latest ."
                     }
                     dir('frontend') {
-                        bat "docker build -t ${DOCKER_IMAGE_FRONTEND}:${BUILD_NUMBER} -t ${DOCKER_IMAGE_FRONTEND}:latest ."
+                        sh "docker build -t ${DOCKER_IMAGE_FRONTEND}:${BUILD_NUMBER} -t ${DOCKER_IMAGE_FRONTEND}:latest ."
                     }
                 }
             }
@@ -126,10 +126,10 @@ pipeline {
                 echo '🚀 Deploying to local environment...'
                 script {
                     // Stop existing containers
-                    bat 'docker-compose down || exit 0'
+                    sh 'docker-compose down || exit 0'
                     
                     // Start new containers
-                    bat 'docker-compose up -d'
+                    sh 'docker-compose up -d'
                     
                     // Wait for services to be ready
                     sleep 10
@@ -142,10 +142,10 @@ pipeline {
                 echo '🏥 Performing health checks...'
                 script {
                     // Check backend health
-                    bat 'curl -f http://localhost:5000/api/health || exit 1'
+                    sh 'curl -f http://localhost:5000/api/health || exit 1'
                     
                     // Check frontend (if applicable)
-                    bat 'curl -f http://localhost:3000 || exit 0'
+                    sh 'curl -f http://localhost:3000 || exit 0'
                 }
             }
         }
@@ -162,18 +162,6 @@ pipeline {
         }
         always {
             echo '🧹 Cleaning up workspace...'
-            // Archive test results
-            junit allowEmptyResults: true, testResults: '**/coverage/*.xml'
-            
-            // Archive coverage reports
-            publishHTML([
-                allowMissing: true,
-                alwaysLinkToLastBuild: true,
-                keepAll: true,
-                reportDir: 'backend/coverage',
-                reportFiles: 'index.html',
-                reportName: 'Backend Coverage Report'
-            ])
         }
     }
 }
